@@ -8,6 +8,9 @@
 - Toetsstof: alle slides
 - Toetswijze: schriftelijk
 
+## To-do
+- Bestudeer de programma's uit de slides
+
 ## LECTURE 1: Inleiding
 
 ### Wat is C?
@@ -60,3 +63,19 @@
 - **If statement**
 
 - **While loop**
+
+## LECTURE 2: Types, initialisatie, assignment, expressies en casts
+
+### Geheugen
+
+- **Geheugen**
+
+- **Adres**
+
+### Ingebouwde types
+
+### Declaratie en initialisatie
+
+### Precedence
+
+### Typeconversie en casten
