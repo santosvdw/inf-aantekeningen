@@ -308,10 +308,18 @@ Met assertions kan je gemakkelijk unit tests doen. Je kan namelijk simpelweg een
 ## LECTURE 5: Strings en arrays
 
 - **Array**
+Een array is een verzameling van waardes van hetzelfde type. Arrays zijn statisch getypeerd en er moet bij declaratie ook gelijk al aangegeven worden wat de lengte van het array is (als de array niet geïnitialiseerd is), anders hoef je niet per se de lengte van het array mee te geven.
+
+  ```c
+  int getallen[100]; // Een ongeïnitaliseerde array met ruimte voor 100 getallen
+  char groet[] = "Hallo!"; // Een geïnitialiseerde array met ruimte voor 6 karakters
+  ```
 
 - **Index**
+Met de index kan je een bepaalde waarde uit een array aanwijzen en ophalen. Het is belangrijk om te weten dat veel talen zoals C zero-indexed zijn, wat betekent dat de eerste waarde van een array met index 0 kan worden opgehaald, oftewel met `getallen[0]`.
 
 - **Strings**
+Strings zijn verzamelingen van chars, oftwel: tekst. Er is geen speciaal datatype voor strings in C, dus als je een tekst in een variabele wilt opslaan, moet je een array van karakters aanmaken.
 
 ## LECTURE 6: Pointers
 
