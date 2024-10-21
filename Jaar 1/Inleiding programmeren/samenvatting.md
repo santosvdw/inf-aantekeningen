@@ -138,33 +138,6 @@ C is een general-purpose programmeertaal, uitgevonden in 1970.
   }
   ```
 
-### While en if
-
-In C is het mogelijk om code alleen uit te voeren op basis van bepaalde condities.
-
-- **If statement**
-  Een if statement voert de code binnen het blok alleen uit als de conditie waar is.
-
-  ```c
-  int available = 1;
-
-  if (available) {
-      printf("You're available.\n");
-  }
-  ```
-
-- **While loop**
-  Een while loop voert de code telkens uit, terwijl de conditie waar is.
-
-  ```c
-  int teller = 0;
-
-  while (teller < 10) {
-      printf("teller = %d\n", teller);
-      teller++;
-  }
-  ```
-
 ## LECTURE 2: Types, initialisatie, assignment, expressies en casts
 
 ### Geheugen
@@ -205,30 +178,75 @@ Geheugen in C moet door de ontwikkelaar van de code zelf beheerd worden. Voor ar
 ### Typeconversie en casten
 
 - **Casten**
-Door te casten zet je een datatype om naar een ander datatype. Dit wordt soms automatisch gedaan door de compiler, maar je kan het ook zelf doen.
+  Door te casten zet je een datatype om naar een ander datatype. Dit wordt soms automatisch gedaan door de compiler, maar je kan het ook zelf doen.
   ```c
   float f = 9.8;
   int i = (int) f; // Cast float f naar een integer
   ```
-Er zijn meerdere redenen om te casten:
+  Er zijn meerdere redenen om te casten:
   1. Je kunt zelf bepalen welke types variabelen zijn en je voorkomt dat de compiler op een verkeerde manier cast.
   2. Je voorkomt waarschuwingen van de compiler.
 
 ## LECTURE 3: Controlestructuren, logische operatoren en functies
 
+### Controlestructuren
+In C is het mogelijk om code alleen uit te voeren op basis van bepaalde condities.
+
+- **If statement**
+  Een if statement voert de code binnen het blok alleen uit als de conditie waar is.
+
+  ```c
+  int available = 1;
+
+  if (available) {
+      printf("You're available.\n");
+  }
+  ```
+
+Dit principe kan uitgebreid worden door bepaalde code regelmatig uit te laten voeren terwijl een bepaalde conditie waar is.
+
+- **While loop**
+  Een while loop voert de code telkens uit, terwijl de conditie waar is.
+
+  ```c
+  int teller = 0;
+
+  while (teller < 10) {
+      printf("teller = %d\n", teller);
+      teller++;
+  }
+  ```
+
+- **For loop**
+Een for loop voert de code telkens uit, totdat de teller van de loop de limiet heeft bereikt.
+  ```c
+  for (int i = 0; i < 10; i++) {
+    printf("i = %d\n", i);
+  }
+  ```
+
 ### Logische operatoren
 
-- **If statements**
-
 - **Logische operatoren**
+  Om twee waardes met elkaar te vergelijken heb je operatoren nodig. Dit kan met wiskundige of met logische operatoren.
 
-  - Short-circuiting
+  Wiskundige operatoren:
+  | Operator | Betekenis |
+  | --- | --- |
+  | == | Gelijk aan |
+  | > | Groter dan |
+  | < | Kleiner dan |
+  | >= | Groter dan of gelijk aan |
+  | <= | Kleiner dan of gelijk aan |
 
-- **Goto**
+  Logische operatoren:
+  | Operator | Betekenis |
+  | --- | --- |
+  | && | Allebei de expressies zijn waar |
+  | &#124;&#124; | Een van de twee expressies is waar |
 
-### Controlestructuren
+  De logische operatoren zijn short-circuiting, wat betekent dat het tweede deel van de expressie alleen geëvalueerd wordt als het eerste deel waar (of niet waar) is. Dit wordt gedaan om de snelheid van het programma te optimaliseren.
 
-- **Loops en whilestructuren**
 
 ## LECTURE 4: Functies en scope
 
