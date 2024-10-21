@@ -166,23 +166,28 @@ Geheugen in C moet door de ontwikkelaar van de code zelf beheerd worden. Voor ar
 
 - **Casten**
   Door te casten zet je een datatype om naar een ander datatype. Dit wordt soms automatisch gedaan door de compiler, maar je kan het ook zelf doen.
+
   ```c
   float f = 9.8;
   int i = (int) f; // Cast float f naar een integer
   ```
+
   Er zijn meerdere redenen om te casten:
+
   1. Je kunt zelf bepalen welke types variabelen zijn en je voorkomt dat de compiler op een verkeerde manier cast.
   2. Je voorkomt waarschuwingen van de compiler.
 
   De volgorde waarop de compiler typeconversie toepast is als volgt:
+
   1. Integer types kleiner dan `int` worden omgezet naar `int`
   2. Als de twee variabelen verschillende types zijn, worden ze omgezet naar het grootste type. Bijvoorbeeld:
-    ```c
-    float f = 1.2;
-    double d = 1.20002;
 
-    double result = 2.40002; // Beide variabelen worden een double omdat doubles meer ruimte in beslag nemen dan floats.
-    ```
+  ```c
+  float f = 1.2;
+  double d = 1.20002;
+
+  double result = 2.40002; // Beide variabelen worden een double omdat doubles meer ruimte in beslag nemen dan floats.
+  ```
 
 ## LECTURE 3: Controlestructuren, logische operatoren en functies
 
@@ -263,43 +268,44 @@ Dit principe kan uitgebreid worden door bepaalde code regelmatig uit te laten vo
   ```
 
 - **Argumenten en parameters**
-Parameters zijn de waarden die een functie ontvangt, zoals de variabele `int nummer` in het bovenstaande voorbeeld. Argumenten zijn de waardes van deze parameters zodra ze aan een functie worden meegegeven, in het bovenstaande voorbeeld is `5` het argument.
+  Parameters zijn de waarden die een functie ontvangt, zoals de variabele `int nummer` in het bovenstaande voorbeeld. Argumenten zijn de waardes van deze parameters zodra ze aan een functie worden meegegeven, in het bovenstaande voorbeeld is `5` het argument.
 
 - **Return**
-Als je een functie hebt die een waarde terug moet geven, zoals bij de functie `int verdubbel()` hierboven, dan is het verplicht om een waarde met `return` terug te geven in die functie. Met return geef je het einde van een functie aan, alle code die onder een return statement staat wordt niet uitgevoerd. Het is belangrijk om met return statements rekening te houden dat de variabele die je terug geeft van het juiste type is, en niet dat je een float retourneerd terwijl de functie een integer als output had gegeven. Bij void functies zoals `void print_naam(char[] naam` is het niet verplicht om een return statement te gebruiken, en is het zelfs verkeerd om een waarde bij de return statement te zetten. Als je toch een void functie met een return wilt afsluiten, typ dan simpelweg `return;`.
+  Als je een functie hebt die een waarde terug moet geven, zoals bij de functie `int verdubbel()` hierboven, dan is het verplicht om een waarde met `return` terug te geven in die functie. Met return geef je het einde van een functie aan, alle code die onder een return statement staat wordt niet uitgevoerd. Het is belangrijk om met return statements rekening te houden dat de variabele die je terug geeft van het juiste type is, en niet dat je een float retourneerd terwijl de functie een integer als output had gegeven. Bij void functies zoals `void print_naam(char[] naam` is het niet verplicht om een return statement te gebruiken, en is het zelfs verkeerd om een waarde bij de return statement te zetten. Als je toch een void functie met een return wilt afsluiten, typ dan simpelweg `return;`.
 
 - **Recursie**
-Recursie betekent dat een functie zichzelf aanroept. Dit kan bijvoorbeeld gebeuren bij het berekenen van reeksen.
+  Recursie betekent dat een functie zichzelf aanroept. Dit kan bijvoorbeeld gebeuren bij het berekenen van reeksen.
 
 ### Scope
 
 - **Scope**
-De scope van een variabele is het gebied binnen een bestand waar de variabele toegankelijk is. Een variabele die binnen een functie gedeclareerd wordt is bijvoorbeeld alleen maar toegankelijk binnen die functie, en zal uit het geheugen verwijderd worden zodra de functie klaar is. Je kan ook globale variabelen hebben, die overal in het bestand beschikbaar zijn, het is echter belangrijk om die niet te vaak te gebruiken, omdat je bestand dan onoverzichtelijk kan worden.
+  De scope van een variabele is het gebied binnen een bestand waar de variabele toegankelijk is. Een variabele die binnen een functie gedeclareerd wordt is bijvoorbeeld alleen maar toegankelijk binnen die functie, en zal uit het geheugen verwijderd worden zodra de functie klaar is. Je kan ook globale variabelen hebben, die overal in het bestand beschikbaar zijn, het is echter belangrijk om die niet te vaak te gebruiken, omdat je bestand dan onoverzichtelijk kan worden.
 
 - **Lifetime**
-De lifetime van een variabele betekent hoe lang deze variabele in het geheugen beschikbaar blijft.
+  De lifetime van een variabele betekent hoe lang deze variabele in het geheugen beschikbaar blijft.
 
 Er zijn drie soorten variabelen en deze hebben alle drie een andere lifetime.
-  | Soort variabele | Lifetime |
-  | --- | --- |
-  | Automatisch | De lifetime van deze variabele is vanaf het moment dat de functie wordt aangeroepen tot het einde van de functie |
-  | Statisch | De lifetime van deze variabele is vanaf het moment dat het programma start tot het einde van het programma |
-  | Dynamisch | De lifetime van deze variabele is vanaf het moment dat er handmatig geheugen wordt toegewezen (bijvoorbeeld met `malloc()`) tot dat het geheugen weer wordt vrijgegeven (met `free()`) |
+| Soort variabele | Lifetime |
+| --- | --- |
+| Automatisch | De lifetime van deze variabele is vanaf het moment dat de functie wordt aangeroepen tot het einde van de functie |
+| Statisch | De lifetime van deze variabele is vanaf het moment dat het programma start tot het einde van het programma |
+| Dynamisch | De lifetime van deze variabele is vanaf het moment dat er handmatig geheugen wordt toegewezen (bijvoorbeeld met `malloc()`) tot dat het geheugen weer wordt vrijgegeven (met `free()`) |
 
 - **Call by value**
-Dit is een methode van compilers waarbij de waarde van een argument bij het aanroepen van een functie simpelweg gekopieerd wordt, inplaats van dat de gehele variabele gekopieerd wordt. Dit betekent dat aanpassingen die binnen de functie gedaan worden geen effect hebben op de oospronkelijke variabele. Dit is belangrijk, omdat het ongewenste side effects kan voorkomen.
+  Dit is een methode van compilers waarbij de waarde van een argument bij het aanroepen van een functie simpelweg gekopieerd wordt, inplaats van dat de gehele variabele gekopieerd wordt. Dit betekent dat aanpassingen die binnen de functie gedaan worden geen effect hebben op de oospronkelijke variabele. Dit is belangrijk, omdat het ongewenste side effects kan voorkomen.
 
 ### Testen
+
 Het is ook mogelijk om in C programma's te testen. Op deze manier weet je zeker dat de code ook daadwerkelijk werkt zoals gewenst.
 
 - **System test**
-System tests testen het gehele programma, inclusief alle componenten erin.
+  System tests testen het gehele programma, inclusief alle componenten erin.
 
 - **Unit test**
-Een unit test test individuele componenten, om zo zeker te weten dat ze ook werken als gewenst.
+  Een unit test test individuele componenten, om zo zeker te weten dat ze ook werken als gewenst.
 
 - **Assertions**
-Met assertions kan je gemakkelijk unit tests doen. Je kan namelijk simpelweg een testen of een functie met een bepaalde input gelijk staat aan de verwachte uitkomst. Als dat niet zo is, stopt het hele programma en wordt er een foutmelding gegeven, anders gaan het programma gewoon verder.
+  Met assertions kan je gemakkelijk unit tests doen. Je kan namelijk simpelweg een testen of een functie met een bepaalde input gelijk staat aan de verwachte uitkomst. Als dat niet zo is, stopt het hele programma en wordt er een foutmelding gegeven, anders gaan het programma gewoon verder.
   ```c
   assert(function(argument) == gewenste_waarde);
   // De volgende code wordt alleen uitgevoerd als de assert waar is
@@ -308,7 +314,7 @@ Met assertions kan je gemakkelijk unit tests doen. Je kan namelijk simpelweg een
 ## LECTURE 5: Strings en arrays
 
 - **Array**
-Een array is een verzameling van waardes van hetzelfde type. Arrays zijn statisch getypeerd en er moet bij declaratie ook gelijk al aangegeven worden wat de lengte van het array is (als de array niet geïnitialiseerd is), anders hoef je niet per se de lengte van het array mee te geven.
+  Een array is een verzameling van waardes van hetzelfde type. Arrays zijn statisch getypeerd en er moet bij declaratie ook gelijk al aangegeven worden wat de lengte van het array is (als de array niet geïnitialiseerd is), anders hoef je niet per se de lengte van het array mee te geven.
 
   ```c
   int getallen[100]; // Een ongeïnitaliseerde array met ruimte voor 100 getallen
@@ -316,26 +322,41 @@ Een array is een verzameling van waardes van hetzelfde type. Arrays zijn statisc
   ```
 
 - **Index**
-Met de index kan je een bepaalde waarde uit een array aanwijzen en ophalen. Het is belangrijk om te weten dat veel talen zoals C zero-indexed zijn, wat betekent dat de eerste waarde van een array met index 0 kan worden opgehaald, oftewel met `getallen[0]`.
+  Met de index kan je een bepaalde waarde uit een array aanwijzen en ophalen. Het is belangrijk om te weten dat veel talen zoals C zero-indexed zijn, wat betekent dat de eerste waarde van een array met index 0 kan worden opgehaald, oftewel met `getallen[0]`.
 
 - **Strings**
-Strings zijn verzamelingen van chars, oftwel: tekst. Er is geen speciaal datatype voor strings in C, dus als je een tekst in een variabele wilt opslaan, moet je een array van karakters aanmaken.
+  Strings zijn verzamelingen van chars, oftwel: tekst. Er is geen speciaal datatype voor strings in C, dus als je een tekst in een variabele wilt opslaan, moet je een array van karakters aanmaken.
 
 ## LECTURE 6: Pointers
 
 - **Pointers**
+  Pointers zijn variabelen die naar het geheugenadres van een andere variabele wijzen. Pointers hebben verschillende voordelen, maar een noemenswaardige is dat pointers het mogelijk maken om variabelen buiten de scope van een functie te gebruiken.
 
 - **Pointer initialiseren**
+  Een pointer initialiseer je door een \* aan de naam van de variabele toe te voegen bij declaratie (de ster kan weggelaten worden als je de variabele ook gelijk initialiseert). De waarde van de pointer wordt aangemaakt door een & met de naam van de doelvariabele toe te wijzen. Deze & kan gelezen worden als "het adres van"
+
+  ```c
+  int pointer = &andere_variabele;
+  int *pointer_twee;
+  pointer_twee = &andere_variabele;
+  ```
+
+  In dit geval zijn er twee pointers aangemaakt die allebei naar het adres van `andere_variabale` wijzen.
 
 - **Dereferencing**
+Door een * aan een geïnitialiseerde pointer toe te voegen, kan je de waarde lezen. **& betekent maak de pijl, * betekent volg de pijl.**
 
 - **Void pointers**
+Void pointers zijn speciaal omdat ze naar elke soort variabele kunnen wijzen `void *ptr;`. Je kan deze gebruiken als je bij het schrijven van de code niet helemaal zeker weet naar wat voor type variabele je wijst. Je moet het echter wel naar een type typecasten voordat je hem kan dereferencen.
 
 - **Null pointers**
+Null pointers wijzen niet naar een geldig geheugenadres, maar naar een NULL waarde, wat betekent dat de pointer nog geen bruikbare waarde heeft. De pointer kan later echter een nieuwe waarde toegewezen krijgen, waardoor deze wel bruikbaar wordt.
 
 - **Arrays en pointers**
+Arrays lijken erg op pointers, maar zijn niet hetzelfde. Je kan wel toegang krijgen tot een geheel array door een pointer te maken naar de eerste index van het array. Als je een array meegeeft aan een functie, wordt het array zelf niet meegegeven, maar een pointer naar het array. Als een array meegeeft aan een functie is het vaak wel belangrijk om de lengte van de array mee te geven. Een ander verschil tussen arrays en pointers is dat een array na declaratie niet aangepast kan worden, een pointer wel.
 
 - **Pointer pointers**
+Pointer pointers slaan het adres van een andere pointer op. Dit kan handig zijn voor het creeëren van tweedimensionale arrays, of andere geavanceerde datastructuren. Om een pointer pointer te initialiseren, moet je eerst een pointer hebben die al naar een geldig geheugenadres wijst. 
 
 ## LECTURE 7: Input en output
 
