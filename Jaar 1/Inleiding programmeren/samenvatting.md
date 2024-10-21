@@ -79,7 +79,9 @@ C is een general-purpose programmeertaal, uitgevonden in 1970.
   ```c
   int getal = 5; // int is het type, getal is de naam, 5 is de waarde
   ```
+
   Een variabele heeft dus verschillende kenmerken:
+
   - _Naam_
     De naam van een variabele zegt het al, dit is gewoon hoe die variabele heet. Door de naam van de variabele te gebruiken in je code, gebruik je eigenlijk de waarde van deze variabele.
   - _Waardes_
@@ -88,113 +90,129 @@ C is een general-purpose programmeertaal, uitgevonden in 1970.
     Variabelen kunnen verschillende vormen aannemen en kunnen dus verschillende types hebben. Zo kan een variabele bijvoorbeeld een integer zijn, of een string. Dit zijn allebei types.
 
 - **Integer types**
-Integer types zijn bedoeld om alle hele positieve en negatieve getallen, inclusief 0 op te slaan.
+  Integer types zijn bedoeld om alle hele positieve en negatieve getallen, inclusief 0 op te slaan.
 - **Floating point types**
-Integer types zijn bedoeld om alle niet-hele positieve en negatieve getallen op te slaan.
+  Integer types zijn bedoeld om alle niet-hele positieve en negatieve getallen op te slaan.
 
 - **Declaraties**
-Het declareren van een functie of variabele betekent het aanmaken van een variabele of functie in het programma.
+  Het declareren van een functie of variabele betekent het aanmaken van een variabele of functie in het programma.
 
 - **Format specifiers**
-Format specifiers geven de compiler van het programma aan wat voor soort data er geprint moet worden, bij het gebruik van een printf() functie. Een aantal format specifiers zijn bijvoorbeeld:
+  Format specifiers geven de compiler van het programma aan wat voor soort data er geprint moet worden, bij het gebruik van een printf() functie. Een aantal format specifiers zijn bijvoorbeeld:
 
-    | Specifier | Type |
-    |---|---|
-    |%c | char|
-    %d | int
-    %s | string
-    %f | float
+  | Specifier | Type   |
+  | --------- | ------ |
+  | %c        | char   |
+  | %d        | int    |
+  | %s        | string |
+  | %f        | float  |
 
 ### Assignments en expressies
 
 - **Assignment**
-Bij een assignment sla je een (nieuwe) waarde op in een al gedeclareerde variabele.
+  Bij een assignment sla je een (nieuwe) waarde op in een al gedeclareerde variabele.
 
-    ```c
-    int voorbeeld = 1; // Declaratie
-    voorbeeld = 5; // Assignment
-    ```
+  ```c
+  int voorbeeld = 1; // Declaratie
+  voorbeeld = 5; // Assignment
+  ```
 
 - **Statement**
-Een statement is een instructie voor de computer. Elke regel code die wordt uitgevoerd is een statement.
-    ```c
-    printf("Dit is een statement.\n");
-    ```
+  Een statement is een instructie voor de computer. Elke regel code die wordt uitgevoerd is een statement.
+
+  ```c
+  printf("Dit is een statement.\n");
+  ```
 
 - **Expressie**
-Expressies zijn combinaties van variabelen en operators die samen nieuwe waardes vormen, oftewel: rekensommen. Met expressies is het belangrijk om te weten dat ze dezelfde precedentieregels volgen als met normale rekensommen: eerst haakjes wegwerken, dan delen en vermenigvuldigen en ten slotte optellen en aftrekken, altijd van links naar rechts.
+  Expressies zijn combinaties van variabelen en operators die samen nieuwe waardes vormen, oftewel: rekensommen. Met expressies is het belangrijk om te weten dat ze dezelfde precedentieregels volgen als met normale rekensommen: eerst haakjes wegwerken, dan delen en vermenigvuldigen en ten slotte optellen en aftrekken, altijd van links naar rechts.
+
+- **Side effects**
+  Als een functie, operatie of expressie een extra effect heeft, los van het primaire doel van de functie, dan noem je dit een side effect.
+
+  ```c
+  int verdubbel (int nummer) {
+      int resultaat = nummer * 2;
+      printf("Het verdubbelde nummer is: %d\n", resultaat); // Side effect
+      return resultaat; // Primaire effect
+  }
+  ```
 
 ### While en if
+
 In C is het mogelijk om code alleen uit te voeren op basis van bepaalde condities.
 
 - **If statement**
-Een if statement voert de code binnen het blok alleen uit als de conditie waar is.
+  Een if statement voert de code binnen het blok alleen uit als de conditie waar is.
 
-    ```c
-    int available = 1;
+  ```c
+  int available = 1;
 
-    if (available) {
-        printf("You're available.\n");
-    }
-    ```
+  if (available) {
+      printf("You're available.\n");
+  }
+  ```
 
 - **While loop**
-Een while loop voert de code telkens uit, terwijl de conditie waar is.
+  Een while loop voert de code telkens uit, terwijl de conditie waar is.
 
-    ```c
-    int teller = 0;
+  ```c
+  int teller = 0;
 
-    while (teller < 10) {
-        printf("teller = %d\n", teller);
-        teller++;
-    }
-    ```
+  while (teller < 10) {
+      printf("teller = %d\n", teller);
+      teller++;
+  }
+  ```
 
 ## LECTURE 2: Types, initialisatie, assignment, expressies en casts
 
 ### Geheugen
 
+Geheugen in C moet door de ontwikkelaar van de code zelf beheerd worden. Voor arrays zal je bijvoorbeeld zelf ruimte vrij moeten maken in het geheugen, en deze zal je aan het einde van je programma ook zelf weer moeten vrijgeven, om memory leaks te voorkomen.
+
 - **Geheugen**
+  Het geheugen is een verzameling van informatie. Het geheugen in C onthoudt de waardes van onder andere variabelen, en plaats deze waardes op een bepaalde plek in het geheugen. Bij het reserveren van geheugen moet je ook rekening houden met wat voor soort variabele je wilt opslaan: een char neemt bijvoorbeeld minder ruimte in beslag dan een size_t, dus hoef je voor een char ook minder ruimte te reserveren dan voor een size_t.
 
 - **Adres**
+  Het adres van een variabele is de plek waar binnen het geheugen de variabele staat opgeslagen. Met het adres kan je dus de waarde van een variabele opvragen.
 
 - **Byte**
+  Een byte is het kleinste stukje informatie dat binnen het geheugen kan worden opgeslagen en bestaat uit 8 bits. Over het algemeen zijn chars de enige datatypes die in één byte kunnen worden opgeslagen.
 
 ### Ingebouwde types
 
 - **Datatypes**
 
   - _int_
+    Integers (int) zijn hele getallen.
 
-    - Signed, unsigned
-    - Short, long
-    - Literals
+    - Signed, unsigned: Signed betekent dat een integer positief **en** negatief kan zijn. Unsigned betekent dat een integer alleen positief kan zijn.
+    - Short, long: Short integers nemen 2 bytes geheugen in beslag dus hun domein is [-32768,32768]. Long integers hebben 8 bytes en kunnen nummers tot ver in de miljarden opslaan.
 
   - _char_
-
-    - Literals
+    Characters (char) zijn enkele karakters
 
   - _sizeof en size_t_
+    **Size_t** wordt gebruikt om de grootte van een array in bytes op te slaan. Deze grootte kan opgevraagd worden met de `size_of()` functie.
 
   - _Floats en doubles_
+    Floats en doubles zijn beide kommagetallen. Doubles kunnen echter veel grotere getallen opslaan dan floats.
 
 - **Implementation defined**
-
-### Declaratie en initialisatie
-
-- **Variabelen**
-
-- **Expressies**
-
-- **Precedence**
-
-- **Side effects**
+  In C is het niet standaard gedefinieerd hoe de taal zich gedraagd, waardoor sommige elementen van compiler tot compiler verschillen, omdat zij deze op een andere manier uitvoeren. Een goed voorbeeld hiervan is de grootte van een bepaald type, zoals een char. Sommige compilers wijzen een char bijvoorbeeld 4 bits toe, en een andere 8. Dit soort verschillen kunnen ertoe leiden dat bepaalde code niet werkt op andere machines, dus het is belangrijk dat de ontwikkelaar goed oplet en test tijdens dat hij het programma ontwikkelt.
 
 ### Typeconversie en casten
 
-- **Type conversies**
-
 - **Casten**
+Door te casten zet je een datatype om naar een ander datatype. Dit wordt soms automatisch gedaan door de compiler, maar je kan het ook zelf doen.
+  ```c
+  float f = 9.8;
+  int i = (int) f; // Cast float f naar een integer
+  ```
+Er zijn meerdere redenen om te casten:
+  1. Je kunt zelf bepalen welke types variabelen zijn en je voorkomt dat de compiler op een verkeerde manier cast.
+  2. Je voorkomt waarschuwingen van de compiler.
 
 ## LECTURE 3: Controlestructuren, logische operatoren en functies
 
@@ -361,3 +379,7 @@ Een while loop voert de code telkens uit, terwijl de conditie waar is.
 - _Interface_
 - _Implementatie_
 - _Moet een struct in de header?_
+
+```
+
+```
