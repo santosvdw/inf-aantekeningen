@@ -57,19 +57,6 @@ C is een general-purpose programmeertaal, uitgevonden in 1970.
 - **Preprocessor**
   Een preprocessor (of precompiler) is een programma dat zijn input eerst verwerkt en omzet naar output dat dan weer door een ander programma als input kan worden gebruikt. Dit maakt het mogelijk om andere code samen te voegen met je eigen programma, om dus bijvoorbeeld libraries in je code te gebruiken. Een veelvoorkomend voorbeeld van het gebruiken van libraries in C is door ze bovenaan je bestand aan te roepen met `#include <lib.h>`. Deze libraries zijn gewoon hele stukken code die nu door jou gebruikt kunnen worden in je programma, wat voorkomt dat je allerlei veelvoorkomende functionaliteiten helemaal zelf moet schrijven.
 
-- **Functie**
-  Een functie is een vaste set instructies die door de computer uitgevoerd kunnen worden. Functies kunnen een input nemen en een output produceren. Elke functie bevat dan ook een naam, input en output. Bij de input en output is het dan ook belangrijk om te noteren wat voor soort type output het levert: een integer, een character of helemaal wat anders? Soms is er helemaal geen input of output nodig, dan is het type dat deze functies produceren `void`.
-
-  Een functie die een getal met verdubbeld ziet er bijvoorbeeld alsvolgt uit:
-
-  ```c
-  int verdubbel (int nummer) {
-      return nummer * 2;
-  }
-
-  verdubbel(5); // Levert als output 10.
-  ```
-
 ### Types, waardes en variabelen
 
 - **Variabelen**
@@ -187,9 +174,20 @@ Geheugen in C moet door de ontwikkelaar van de code zelf beheerd worden. Voor ar
   1. Je kunt zelf bepalen welke types variabelen zijn en je voorkomt dat de compiler op een verkeerde manier cast.
   2. Je voorkomt waarschuwingen van de compiler.
 
+  De volgorde waarop de compiler typeconversie toepast is als volgt:
+  1. Integer types kleiner dan `int` worden omgezet naar `int`
+  2. Als de twee variabelen verschillende types zijn, worden ze omgezet naar het grootste type. Bijvoorbeeld:
+    ```c
+    float f = 1.2;
+    double d = 1.20002;
+
+    double result = 2.40002; // Beide variabelen worden een double omdat doubles meer ruimte in beslag nemen dan floats.
+    ```
+
 ## LECTURE 3: Controlestructuren, logische operatoren en functies
 
 ### Controlestructuren
+
 In C is het mogelijk om code alleen uit te voeren op basis van bepaalde condities.
 
 - **If statement**
@@ -218,7 +216,7 @@ Dit principe kan uitgebreid worden door bepaalde code regelmatig uit te laten vo
   ```
 
 - **For loop**
-Een for loop voert de code telkens uit, totdat de teller van de loop de limiet heeft bereikt.
+  Een for loop voert de code telkens uit, totdat de teller van de loop de limiet heeft bereikt.
   ```c
   for (int i = 0; i < 10; i++) {
     printf("i = %d\n", i);
@@ -247,40 +245,65 @@ Een for loop voert de code telkens uit, totdat de teller van de loop de limiet h
 
   De logische operatoren zijn short-circuiting, wat betekent dat het tweede deel van de expressie alleen geëvalueerd wordt als het eerste deel waar (of niet waar) is. Dit wordt gedaan om de snelheid van het programma te optimaliseren.
 
-
 ## LECTURE 4: Functies en scope
 
 ### Functies
 
-- **Opbouw van functies**
+- **Functie**
+  Een functie is een vaste set instructies die door de computer uitgevoerd kunnen worden. Functies kunnen een input nemen en een output produceren. Elke functie bevat dan ook een naam, input en output. Bij de input en output is het dan ook belangrijk om te noteren wat voor soort type output het levert: een integer, een character of helemaal wat anders? Soms is er helemaal geen input of output nodig, dan is het type dat deze functies produceren `void`.
 
-  - Naam
-  - Invoer
-  - Uitvoer
+  Een functie die een getal met verdubbeld ziet er bijvoorbeeld alsvolgt uit:
 
-- **Doel van functies**
+  ```c
+  int verdubbel (int nummer) {
+      return nummer * 2;
+  }
+
+  verdubbel(5); // Levert als output 10.
+  ```
 
 - **Argumenten en parameters**
+Parameters zijn de waarden die een functie ontvangt, zoals de variabele `int nummer` in het bovenstaande voorbeeld. Argumenten zijn de waardes van deze parameters zodra ze aan een functie worden meegegeven, in het bovenstaande voorbeeld is `5` het argument.
 
 - **Return**
+Als je een functie hebt die een waarde terug moet geven, zoals bij de functie `int verdubbel()` hierboven, dan is het verplicht om een waarde met `return` terug te geven in die functie. Met return geef je het einde van een functie aan, alle code die onder een return statement staat wordt niet uitgevoerd. Het is belangrijk om met return statements rekening te houden dat de variabele die je terug geeft van het juiste type is, en niet dat je een float retourneerd terwijl de functie een integer als output had gegeven. Bij void functies zoals `void print_naam(char[] naam` is het niet verplicht om een return statement te gebruiken, en is het zelfs verkeerd om een waarde bij de return statement te zetten. Als je toch een void functie met een return wilt afsluiten, typ dan simpelweg `return;`.
 
 - **Recursie**
+Recursie betekent dat een functie zichzelf aanroept. Dit kan bijvoorbeeld gebeuren bij het berekenen van reeksen.
 
 ### Scope
 
 - **Scope**
+De scope van een variabele is het gebied binnen een bestand waar de variabele toegankelijk is. Een variabele die binnen een functie gedeclareerd wordt is bijvoorbeeld alleen maar toegankelijk binnen die functie, en zal uit het geheugen verwijderd worden zodra de functie klaar is. Je kan ook globale variabelen hebben, die overal in het bestand beschikbaar zijn, het is echter belangrijk om die niet te vaak te gebruiken, omdat je bestand dan onoverzichtelijk kan worden.
 
 - **Lifetime**
+De lifetime van een variabele betekent hoe lang deze variabele in het geheugen beschikbaar blijft.
+
+Er zijn drie soorten variabelen en deze hebben alle drie een andere lifetime.
+  | Soort variabele | Lifetime |
+  | --- | --- |
+  | Automatisch | De lifetime van deze variabele is vanaf het moment dat de functie wordt aangeroepen tot het einde van de functie |
+  | Statisch | De lifetime van deze variabele is vanaf het moment dat het programma start tot het einde van het programma |
+  | Dynamisch | De lifetime van deze variabele is vanaf het moment dat er handmatig geheugen wordt toegewezen (bijvoorbeeld met `malloc()`) tot dat het geheugen weer wordt vrijgegeven (met `free()`) |
 
 - **Call by value**
+Dit is een methode van compilers waarbij de waarde van een argument bij het aanroepen van een functie simpelweg gekopieerd wordt, inplaats van dat de gehele variabele gekopieerd wordt. Dit betekent dat aanpassingen die binnen de functie gedaan worden geen effect hebben op de oospronkelijke variabele. Dit is belangrijk, omdat het ongewenste side effects kan voorkomen.
 
 ### Testen
+Het is ook mogelijk om in C programma's te testen. Op deze manier weet je zeker dat de code ook daadwerkelijk werkt zoals gewenst.
 
 - **System test**
+System tests testen het gehele programma, inclusief alle componenten erin.
 
 - **Unit test**
+Een unit test test individuele componenten, om zo zeker te weten dat ze ook werken als gewenst.
 
 - **Assertions**
+Met assertions kan je gemakkelijk unit tests doen. Je kan namelijk simpelweg een testen of een functie met een bepaalde input gelijk staat aan de verwachte uitkomst. Als dat niet zo is, stopt het hele programma en wordt er een foutmelding gegeven, anders gaan het programma gewoon verder.
+  ```c
+  assert(function(argument) == gewenste_waarde);
+  // De volgende code wordt alleen uitgevoerd als de assert waar is
+  ```
 
 ## LECTURE 5: Strings en arrays
 
