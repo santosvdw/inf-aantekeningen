@@ -443,11 +443,33 @@ Het is ook mogelijk om in C programma's te testen. Op deze manier weet je zeker 
   ```
 
 - **Fouten afhandelen**
-Het is belangrijk om altijd te controleren of een stream correct is geopend. Om dit te doen kan je bijvoorbeeld checken of de stream gelijk staat aan null: `file == NULL`. Als volgt kan je de `perror()` functie gebruiken om een foutmelding te printen.
+  Het is belangrijk om altijd te controleren of een stream correct is geopend. Om dit te doen kan je bijvoorbeeld checken of de stream gelijk staat aan null: `file == NULL`. Als volgt kan je de `perror()` functie gebruiken om een foutmelding te printen.
 
 ## LECTURE 8: Custom types maken
 
 - **Enums**
+  Een enum is een speciaal type waar je een aantal constante gegevens in kan opslaan. Enums zijn handig om je code leesbaar en consistent te houden.
+
+  ```c
+  enum Dag {
+    MAANDAG,
+    DINSDAG,
+    ...,
+    ZONDAG
+  };
+
+  enum Dag vandaag = MAANDAG;
+  ```
+
+  De waardes in de enums zijn zero-indexed, wat betekent dat `MAANDAG` in het bovenstaande voorbeeld gelijk staat aan 0, en `ZONDAG` aan 6. Het is echter ook mogelijk om zelf waardes mee te geven:
+
+  ```c
+  enum Level {
+    LAAG = 0,
+    MIDDEL = 50,
+    HOOG = 100
+  };
+  ```
 
 - **Structs**
 
@@ -512,11 +534,3 @@ Het is belangrijk om altijd te controleren of een stream correct is geopend. Om 
 - _Interface_
 - _Implementatie_
 - _Moet een struct in de header?_
-
-```
-
-```
-
-```
-
-```
