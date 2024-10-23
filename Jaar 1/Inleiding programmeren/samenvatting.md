@@ -472,13 +472,82 @@ Het is ook mogelijk om in C programma's te testen. Op deze manier weet je zeker 
   ```
 
 - **Structs**
+  Met structs (structures) kan je meerdere soorten variabelen groeperen. Een struct kan gezien worden als een template die je later kan overnemen en aanvullen met je eigen waarden.
+
+  ```c
+  // Declaratie van een struct genaamd Student
+  struct Student {
+    int id;
+    char naam[30];
+    int leeftijd;
+  };
+
+  // Initalisatie van een struct
+  struct Student piet = {12345678, "Piet", 18};
+
+  // Alternatieve methode
+  struct Student piet;
+  piet.id = 12345678;
+  ...
+  piet.leeftijd = 18;
+  ```
 
   - _Pointers naar structs_
+    Het intialiseren van een pointer naar een struct doe je als volgt:
+
+  ```c
+  struct Student piet;
+  struct Student* pointer = &piet;
+
+  // Het is ook mogelijk om beide variabelen op het zelfde moment te declareren!
+  struct Student piet, *pointer;
+  pointer = &piet;
+  ```
+
+  Het intialiseren van een pointer naar een struct in C is dus relatief simpel: vergeet gewoon niet dat je niet alleen het struct keyword opschrijft, maar ook de naam van de struct. En vergeet uiteraard niet om naar het adres van de andere struct te wijzen!
+
   - _Struct pointers dereferencen_
+    Een struct pointer dereferencen (oftewel: de waardes van een struct lezen) is relatief simpel, het enige dat je nodig hebt is de struct dereference operator `->`.
+
+  ```c
+  struct Student piet, *pointer;
+  pointer = &piet;
+
+  int leeftijd_van_piet = pointer->leeftijd;
+  ```
 
 - **Typedefs**
+  Typedefs (typedefinitions) kunnen gebruikt worden om nieuwe namen te geven aan bestaande types. Typedefs pas je als volgende toe:
+
+  ```c
+  typedef bestaand_type nieuwe_naam;
+
+  // Je kan een typedef dus als volgt declareren:
+  typedef short unsigned int USHORT;
+  USHORT x;
+  ```
+
+  Het is niet mogelijk om `static` te gebruiken bij een typedef. Als je een static typedef wilt maken kan dat als volgt:
+
+  ```c
+  typedef long int LINT;
+  static LINT y;
+  ```
 
 - **Unions**
+  Een union is netals een struct een samenstelling van variabelen op één plek. Unions en structs lijken erg op elkaar en worden ook op dezelfde manier geinitliaseerd en gebruikt.
+
+  ```c
+  union Student student {
+    int id;
+    char naam[30];
+    int leeftijd;
+  }
+
+  union Student henk;
+  ```
+
+  Het voornaamste verschil tussen een union en een struct is het feit dat alle velden in structs dezelfde hoeveelheid geheugen innemen, terwijl er bij een struct ruimte in het geheugen wordt vrijgemaakt op basis van het type variabele. Alle waarden binnen een struct delen namelijk hetzelfde geheugen, wat betekent dat er maar één variabele actief kan zijn binnen een struct. Dit betekent dat als je bijvoorbeeld `student.leeftijd` initialiseert, `student.naam` en `student.id` overschreven worden.
 
 ## LECTURE 9: Geheugen
 
