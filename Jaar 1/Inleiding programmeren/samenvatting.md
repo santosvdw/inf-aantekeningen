@@ -79,7 +79,7 @@ C is een general-purpose programmeertaal, uitgevonden in 1970.
 - **Integer types**
   Integer types zijn bedoeld om alle hele positieve en negatieve getallen, inclusief 0 op te slaan.
 - **Floating point types**
-  Integer types zijn bedoeld om alle niet-hele positieve en negatieve getallen op te slaan.
+  Integer types zijn bedoeld om kommagetallen op te slaan.
 
 - **Declaraties**
   Het declareren van een functie of variabele betekent het aanmaken van een variabele of functie in het programma.
@@ -333,18 +333,14 @@ Het is ook mogelijk om in C programma's te testen. Op deze manier weet je zeker 
   Pointers zijn variabelen die naar het geheugenadres van een andere variabele wijzen. Pointers hebben verschillende voordelen, maar een noemenswaardige is dat pointers het mogelijk maken om variabelen buiten de scope van een functie te gebruiken.
 
 - **Pointer initialiseren**
-  Een pointer initialiseer je door een \* aan de naam van de variabele toe te voegen bij declaratie (de ster kan weggelaten worden als je de variabele ook gelijk initialiseert). De waarde van de pointer wordt aangemaakt door een & met de naam van de doelvariabele toe te wijzen. Deze & kan gelezen worden als "het adres van"
+  Een pointer initialiseer je door een \* aan de naam van de variabele toe te voegen bij declaratie. De waarde van de pointer wordt aangemaakt door een & met de naam van de doelvariabele toe te wijzen. Deze & kan gelezen worden als "het adres van"
 
   ```c
-  int pointer = &andere_variabele;
-  int *pointer_twee;
-  pointer_twee = &andere_variabele;
+  int *pointer = &andere_variabele;
   ```
 
-  In dit geval zijn er twee pointers aangemaakt die allebei naar het adres van `andere_variabale` wijzen.
-
 - **Dereferencing**
-  Door een _ aan een geïnitialiseerde pointer toe te voegen, kan je de waarde lezen. \*\*& betekent maak de pijl, _ betekent volg de pijl.\*\*
+  Door een \* aan een geïnitialiseerde pointer toe te voegen, kan je de waarde lezen waar de pointer naar wijst. Het teken \* dereferentieert de pointer, wat beteeknt dat je toegang krijgt tot de waarde die op het adres van de pointer staat. **& betekent maak de pijl, \* betekent volg de pijl.**
 
 - **Void pointers**
   Void pointers zijn speciaal omdat ze naar elke soort variabele kunnen wijzen `void *ptr;`. Je kan deze gebruiken als je bij het schrijven van de code niet helemaal zeker weet naar wat voor type variabele je wijst. Je moet het echter wel naar een type typecasten voordat je hem kan dereferencen.
@@ -584,49 +580,98 @@ Het is ook mogelijk om in C programma's te testen. Op deze manier weet je zeker 
     return result;
   }
   ```
+
   Deze functie zal zichzelf aanroepen, totdat hij aankomt bij de base condition (in dit geval n == 0). Alle uitkomsten voor `som(n)` zullen op de stack worden opgeslagen, en zodra de base condition is bereikt zullen al deze waarden opgeteld worden tot het uiteindelijke resultaat dat in onderdeel 3 wordt geretourneerd en zal de stack weer vrijgemaakt worden. Het is belangrijk om te onthouden dat de stack werkt met het "LIFO" principe (Last In, First Out), oftewel: recursieve functies worden op de omgekeerde volgorde aangeroepen als ze de basisvoorwaarde hebben bereikt, wat betekent dat ze eigenlijk achterstevoren werken en dat ze beginnen met de laatste conditie.
 
 ### Geheugen gebruiken
 
 - **Globale variabelen**
-Globale variabelen zijn variabelen die overal in een programma beschikbaar zijn (onbeperkte scope). Ze moeten buiten functies worden gedeclareerd. Globale variabelen worden opgeslagen in het datasegment van het geheugen.
+  Globale variabelen zijn variabelen die overal in een programma beschikbaar zijn (onbeperkte scope). Ze moeten buiten functies worden gedeclareerd. Globale variabelen worden opgeslagen in het datasegment van het geheugen.
 
 - **Static variabelen**
-Globale variabelen zijn variabelen die lokaal opgeslagen en dus een beperkte scope hebben. Maar in tegenstelling tot automatische variabelen worden deze variabelen niet op de stack geplaatst, maar in het datasegment, waardoor deze variabelen in het geheugen opgeslagen blijven, zelfs als de functie al afgelopen is.
+  Globale variabelen zijn variabelen die lokaal opgeslagen en dus een beperkte scope hebben. Maar in tegenstelling tot automatische variabelen worden deze variabelen niet op de stack geplaatst, maar in het datasegment, waardoor deze variabelen in het geheugen opgeslagen blijven, zelfs als de functie al afgelopen is.
 
 - **Malloc en free**
-`Malloc()` en `free()` zijn twee functies die gebruikt kunnen worden om dynamisch geheugen van de heap te alloceren en vrij te maken. Met `malloc()` kan je een bepaalde hoeveelheid geheugen alloceren op de heap en met `free()` kan je dit geheugen weer vrijgeven, zodat het opnieuw kan worden gebruikt.
+  `Malloc()` en `free()` zijn twee functies die gebruikt kunnen worden om dynamisch geheugen van de heap te alloceren en vrij te maken. Met `malloc()` kan je een bepaalde hoeveelheid geheugen alloceren op de heap en met `free()` kan je dit geheugen weer vrijgeven, zodat het opnieuw kan worden gebruikt.
 
 - **Memory leaks**
-Memory leaks ontstaan als het geheugen dat met `malloc()` gealloceerd wordt op de heap niet vrijgegeven wordt met `free()`. Aangezien gegevens van de heap niet altijd vrijgemaakt worden aan het einde van een programma, kan het zijn dat deze gegevens die niet meer nodig zijn geheugen blijven opnemen. Dit kan erg onhandig zijn en leiden tot overbodige gegevensopslag, wat computers slomer maakt.
+  Memory leaks ontstaan als het geheugen dat met `malloc()` gealloceerd wordt op de heap niet vrijgegeven wordt met `free()`. Aangezien gegevens van de heap niet altijd vrijgemaakt worden aan het einde van een programma, kan het zijn dat deze gegevens die niet meer nodig zijn geheugen blijven opnemen. Dit kan erg onhandig zijn en leiden tot overbodige gegevensopslag, wat computers slomer maakt.
 
 ## LECTURE 10: Headers, proprocessors en linken
 
-### Compileerstadia
+### Compileerstadia [(Bron)](https://www.geeksforgeeks.org/compiling-a-c-program-behind-the-scenes/)
 
-- **Object files**
-
-- **Executable**
+Het compileren van een C bestand naar een executable file gebeurt in 4 fases.
 
 1. **Preprocess**
+   In deze fase worden de eerste bewerkingen aan het programma gemaakt. Bij het preprocessen van de sourcefile worden onder andere comments weggehaald, worden bijgevoegde bestanden "uitgepakt", worden conditionele compilaties (zoals `#ifndef` of `#define`) uitgevoerd en worden macro's uitgebreid.
 
 2. **Compile**
+   In deze fase worden de preprocessed bestanden omgezet naar assembly instructies.
 
-3. **Link**
+3. **Assembler**
+   In deze fase worden de instructies in assembly omgezet naar een object file.
+
+4. **Link**
+   In deze laatste fase worden alle functies met hun definities gelinkt. Het doel van het linken is om de object bestanden met de libraries te linken, zodat alle functies met hun definities kunnen worden gebruikt.
+
+- **Object files**
+  Object files zijn bestanden in machinecode die uiteindelijk vertaald worden naar executable files, maar nog niet helemaal compleet zijn. Ze worden gegenereerd in de assembly fase.
+
+- **Executable**
+  Executable bestanden zijn bestanden die in machinetaal zijn geschreven en dus door machines gelezen en uitgevoerd kunnen worden.
 
 - _Extern_
+  Met het keyword `extern` geef je aan dat je een variabele uit een ander bestand gebruikt.
 
 - _Static_
+  Met het keyword `static` maak je een statische variabele aan, die niet op de heap wordt geplaatst, maar in het datasegment van het geheugen. Deze variabele wordt geïnitieerd zodra de funtie waarbinnen deze zich bevindt wordt aangeroepen, maar blijft opgeslagen in het geheugen, zelfs zodra de functie afgelopen is. Als de variabele buiten een functie wordt gedeclareerd, betekent dit dat de variabele alleen toegankelijk is binnen het bestand en niet erbuiten.
 
 - _Makefiles en make_
+  Makefiles en zijn bestanden die aangeven hoe bestanden aan elkaar gelinkt kunnen worden en hoe deze gecompileerd moeten worden. Met de `make` command kan je de instructies in de makefile uitvoeren.
 
 ### Header files
 
 - **Header files**
+  Header files zijn bestanden die eindigen met `.h` en zijn gemaakt om een interface te bieden bij het gebruik van code buiten de sourcefile. Header files kunnen in het bestand gezet worden met de `#include` macro, en zullen bij het preprocessen uitgevouwen worden tot hele code die dus wordt samengevoegd met de sourcefile.
 
 - **#include, #define, #if**
+  Dit zijn macro's die bij het preprocessen worden verwerkt.
+
+  1. `#define`: maak een constante variabele aan die bij het preprocessen overal wordt vervangen met zijn waarde.
+
+  ```c
+  // Source code
+  #define LIMIET 100
+  printf("Het limiet is %d.\n", LIMIET);
+
+  // Preprocessed code
+  printf("Het limiet is %d.\n", 100);
+  ```
+
+  2. `#if`, `#ifndef`, `#endif`: gebruik het tussenliggende codeblok alleen als de conditie waar is.
+
+  ```c
+  #ifndef COMPILE_MAIN
+  int main() {...}
+  #endif
+  ```
+
+  3. `#include`: voeg de headerfiles toe van externe bestanden/libraries zodat de functies/variabele daarvan in je sourcefile gebruikt kunnen worden.
+
+  ```c
+  #include <stdio.h> // Gebruik library header file
+  #include "diy.h" // Gebruik een lokale header file
+  ```
 
 - **Modularisatie**
+  Modularisatie is een methode die toegepast kan worden om meerdere bestanden samen in één bestand samen te voegen, zodat het in één programma gebruikt kan worden. Elke module dient een goed georganizeerde interface te hebben, die uitlegt hoe alle functies van een module werken.
+
 - _Interface_
+  Een interface is een bestand met een aantal functiedeclaraties, zonder de implementatie van deze functies. Dit zorgt ervoor dat de code achter de functies privé kan blijven, indien de ontwikkelaar dat wilt.
+
 - _Implementatie_
+  De implementatie van het interface wordt geregeld in een C bestand met dezelfde naam. De code die in dat bestand geschreven wordt zal door de linker samengevoegd worden met de object file van de source file, waardoor de code van de module samen kan werken met de broncode.
+
 - _Moet een struct in de header?_
+  Of een struct in de header gedefineerd moet worden hangt af van de wensen van de ontwikkelaar. Als de ontwikkelaar wilt dat zijn module als een 'black box' functioneert en de gebruiker dus geen toegang mag hebben tot de broncode van de module, wordt het aangeraden om een **forward declaration** te doen, anders kan de ontwikkelaar de struct gewoon in de header initialiseren. Een forward declaration houdt in dat je de struct in de header declareert en in de implementatie initialiseert, waardoor gebruikers de struct-leden niet zelf kunnen aanpassen en de struct alleen kunnen bereiken met pointers. Het voordeel van het initialiseren van de struct in de header is dat de gebruiker zelf ook toegang heeft tot de struct in zijn code, als de struct in het bijbehorende implementatiebestand wordt gedefinieerd heeft de gebruiker geen toegang tot de struct, en kan de gebruiker er alleen maar naar lezen en schrijven met behulp van functies die door de ontwikkelaar zelf zijn geschreven.
