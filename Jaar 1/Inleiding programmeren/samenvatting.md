@@ -553,25 +553,52 @@ Het is ook mogelijk om in C programma's te testen. Op deze manier weet je zeker 
 
 ### Geheugenmodel
 
-- **Segmenten**
+- **Segmenten** [(Bron)](https://www.geeksforgeeks.org/memory-layout-of-c-program/)
   - _Stack_
-  - _Text_
+    De stack wordt gebruikt om variabelen en informatie op te slaan met een beperkte lifetime. De stack heeft geen vaste grootte, maar wordt groter of kleiner aan de hand van het aantal en de grootte van de variabelen die erin zijn opgeslagen. Zodra een functie eindigt, wordt de stack leeggemaakt.
   - _Heap_
-  - _Bss en data_
+    De heap wordt gebruikt voor het dynamisch toewijzen van geheugen aan variabelen. Om het geheugen van de heap te beheren kan je de `malloc()` en `free()` functies gebruiken.
+  - _Text_
+    Het text segment wordt gebruikt om instructies (zoals functies) in op te slaan. Het text segment is voor programma's read-only, wat betekent dat programma's alleen instructies kunnen lezen van de text en ze niet kunnen aanpassen.
+  - _Bss_
+    Het bss segment slaat alle ongeïnitialiseerde variabelen op. In het geval van `int x;` zou `x` bijvoorbeeld in de bss terecht komen.
+  - _Data_
+    Het datasegment slaat alle geïnitaliseerde globale en statische variabelen op.
 
 ### Recursieve functies
 
 - **Recursieve functies**
+  Recursieve functies zijn functies die zichzelf aanroepen en bestaan uit drie onderdelen.
+
+  ```c
+  int som(int n) {
+    // Onderdeel 1: base condition: als dit gedeelte bereikt wordt, stop dan de recursie.
+    if (n == 0) {
+      return 0;
+    }
+
+    // Onderdeel 2: de recursie: roep de functie opnieuw aan, met een nieuw argument.
+    int result = n + som(n-1);
+
+    // Onderdeel 3: het resultaat
+    return result;
+  }
+  ```
+  Deze functie zal zichzelf aanroepen, totdat hij aankomt bij de base condition (in dit geval n == 0). Alle uitkomsten voor `som(n)` zullen op de stack worden opgeslagen, en zodra de base condition is bereikt zullen al deze waarden opgeteld worden tot het uiteindelijke resultaat dat in onderdeel 3 wordt geretourneerd en zal de stack weer vrijgemaakt worden. Het is belangrijk om te onthouden dat de stack werkt met het "LIFO" principe (Last In, First Out), oftewel: recursieve functies worden op de omgekeerde volgorde aangeroepen als ze de basisvoorwaarde hebben bereikt, wat betekent dat ze eigenlijk achterstevoren werken en dat ze beginnen met de laatste conditie.
 
 ### Geheugen gebruiken
 
 - **Globale variabelen**
+Globale variabelen zijn variabelen die overal in een programma beschikbaar zijn (onbeperkte scope). Ze moeten buiten functies worden gedeclareerd. Globale variabelen worden opgeslagen in het datasegment van het geheugen.
 
 - **Static variabelen**
+Globale variabelen zijn variabelen die lokaal opgeslagen en dus een beperkte scope hebben. Maar in tegenstelling tot automatische variabelen worden deze variabelen niet op de stack geplaatst, maar in het datasegment, waardoor deze variabelen in het geheugen opgeslagen blijven, zelfs als de functie al afgelopen is.
 
 - **Malloc en free**
+`Malloc()` en `free()` zijn twee functies die gebruikt kunnen worden om dynamisch geheugen van de heap te alloceren en vrij te maken. Met `malloc()` kan je een bepaalde hoeveelheid geheugen alloceren op de heap en met `free()` kan je dit geheugen weer vrijgeven, zodat het opnieuw kan worden gebruikt.
 
 - **Memory leaks**
+Memory leaks ontstaan als het geheugen dat met `malloc()` gealloceerd wordt op de heap niet vrijgegeven wordt met `free()`. Aangezien gegevens van de heap niet altijd vrijgemaakt worden aan het einde van een programma, kan het zijn dat deze gegevens die niet meer nodig zijn geheugen blijven opnemen. Dit kan erg onhandig zijn en leiden tot overbodige gegevensopslag, wat computers slomer maakt.
 
 ## LECTURE 10: Headers, proprocessors en linken
 
