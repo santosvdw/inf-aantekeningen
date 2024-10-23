@@ -601,19 +601,19 @@ Het is ook mogelijk om in C programma's te testen. Op deze manier weet je zeker 
 
 ### Compileerstadia [(Bron)](https://www.geeksforgeeks.org/compiling-a-c-program-behind-the-scenes/)
 
-Het compileren van een C bestand naar een executable file gebeurt in 4 fases.
+- Het compileren van een C bestand naar een executable file gebeurt in 4 fases.
 
-1. **Preprocess**
-   In deze fase worden de eerste bewerkingen aan het programma gemaakt. Bij het preprocessen van de sourcefile worden onder andere comments weggehaald, worden bijgevoegde bestanden "uitgepakt", worden conditionele compilaties (zoals `#ifndef` of `#define`) uitgevoerd en worden macro's uitgebreid.
+  1. **Preprocess**
+    In deze fase worden de eerste bewerkingen aan het programma gemaakt. Bij het preprocessen van de sourcefile worden onder andere comments weggehaald, worden bijgevoegde bestanden "uitgepakt", worden conditionele compilaties (zoals `#ifndef` of `#define`) uitgevoerd en worden macro's uitgebreid.
 
-2. **Compile**
-   In deze fase worden de preprocessed bestanden omgezet naar assembly instructies.
+  2. **Compile**
+    In deze fase worden de preprocessed bestanden omgezet naar assembly instructies.
 
-3. **Assembler**
-   In deze fase worden de instructies in assembly omgezet naar een object file.
+  3. **Assembler**
+    In deze fase worden de instructies in assembly omgezet naar een object file.
 
-4. **Link**
-   In deze laatste fase worden alle functies met hun definities gelinkt. Het doel van het linken is om de object bestanden met de libraries te linken, zodat alle functies met hun definities kunnen worden gebruikt.
+  4. **Link**
+    In deze laatste fase worden alle functies met hun definities gelinkt. Het doel van het linken is om de object bestanden met de libraries te linken, zodat alle functies met hun definities kunnen worden gebruikt.
 
 - **Object files**
   Object files zijn bestanden in machinecode die uiteindelijk vertaald worden naar executable files, maar nog niet helemaal compleet zijn. Ze worden gegenereerd in de assembly fase.
