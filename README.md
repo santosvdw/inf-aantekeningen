@@ -1,6 +1,6 @@
 # inf-aantekeningen
 
 - Jaar 1
-  - [Inleiding programmeren /](/jaar_1/inleiding_programmeren/)
-  - [Datastructuren /](/jaar_1/datastructuren/)
-  - [Architectuur en computerorganisatie](/jaar_1/arco/)
+  - [Inleiding programmeren /](/inf-aantekeningen/jaar_1/Inleiding_programmeren/)
+  - [Datastructuren](/inf-aantekeningen/jaar_1/datastructuren/)
+  - [Architectuur en computerorganisatie](/inf-aantekeningen/jaar_1/arco/)
