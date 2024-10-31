@@ -1,6 +1,6 @@
 # INLEIDING PROGRAMMEREN (BLOK 1 - JAAR 1)
 
-### Een samenvatting van alle belangrijke concepten
+### Een samenvatting van alle belangrijke concepten 
 
 ## Belangrijke informatie
 
