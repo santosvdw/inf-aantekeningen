@@ -115,7 +115,7 @@ C is een general-purpose programmeertaal, uitgevonden in 1970.
   Expressies zijn combinaties van variabelen en operators die samen nieuwe waardes vormen, oftewel: rekensommen. Met expressies is het belangrijk om te weten dat ze dezelfde precedentieregels volgen als met normale rekensommen: eerst haakjes wegwerken, dan delen en vermenigvuldigen en ten slotte optellen en aftrekken, altijd van links naar rechts.
 
 - **Side effects**
-  Als een functie, operatie of expressie een extra effect heeft, los van het primaire doel van de functie, dan noem je dit een side effect.
+  Als een functie, operatie of expressie een effect heeft dat een variabele aanpast, noem je dit een side effect.
 
   ```c
   int verdubbel (int nummer) {
