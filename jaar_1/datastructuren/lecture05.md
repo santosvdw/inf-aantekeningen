@@ -17,3 +17,9 @@ Met de grote O notatie is het de bedoeling dat je constante waardes verwaarloost
 | n | n² ??|
 | 2^n | n! |
 | log(n³) | log(n) |
+
+### Lower bound
+De lower bound geef je aan met $\Omega$. 
+
+### Sharp bounds
+De sharp bound betekent dat de lower en upper bound aan elkaar gelijk staan, en wordt aangeduidt met $\Theta(n)$
