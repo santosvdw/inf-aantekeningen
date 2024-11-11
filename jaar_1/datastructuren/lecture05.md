@@ -2,7 +2,7 @@
 
 `11 november, 2024`
 
-## BIG O
+## ALG: BIG O
 
 
 > *Definitie:* f E O(g) betekent dat er constantes c, n0 zijn zodat voor alle n >= n0 geldt dat |f(n)\ <= c * g(n)
@@ -23,3 +23,8 @@ De lower bound geef je aan met $\Omega$.
 
 ### Sharp bounds
 De sharp bound betekent dat de lower en upper bound aan elkaar gelijk staan, en wordt aangeduidt met $\Theta(n)$
+
+## DS: Bomen
+Bomen (trees) zijn lijsten waarbij een node meerdere opvolgers heeft.
+
+> Study hard slide: LECTURE 5 P.28: [SLIDES](file:///home/santos/Downloads/Lecture5.pdf)
