@@ -1,3 +1,7 @@
+# Deeltentamen 1 (22/11/24)
+[Samenvatting](/midterm.md)
+
+
 # ARCHITECTUUR EN COMPUTERORGANISATIE `Lecture 1`
 `28 oktober, 2024`
 
