@@ -1,5 +1,5 @@
 # Deeltentamen 1 (22/11/24)
-[Samenvatting](/midterm.md)
+[Samenvatting](/midterm.md) [Study guide](/studyguide.md)
 
 
 # ARCHITECTUUR EN COMPUTERORGANISATIE `Lecture 1`
@@ -39,3 +39,11 @@ Execution time meten:
 CPU Clocking: Operaties van digitale hardware lopen op een constante klok.
 - Klokperiode: duratie van een cyclus
 - Klok frequentie (rate): tikken per seconde
+
+# ARCHITECTUUR EN COMPUTERORGANISATIE `Lecture 2`
+`1 november, 2024`
+
+## Logic gates
+Logic gates zijn bouwblokken binnen hardware die helpen met het reguleren van de logica. Logic gates zijn gemaakt van transistors.
+
+> Lecture 2 is incompleet: de slides zijn erg duidelijk
