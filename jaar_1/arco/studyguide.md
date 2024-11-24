@@ -1,4 +1,5 @@
 # Study guide for ARCO
+[Samenvatting](/midterm.md) 
 
 To effectively tackle understanding technical concepts and processor schematics for your test, I will outline a structured approach. However, since I cannot directly access the content of the uploaded file, I’ll provide general advice on learning and understanding technical concepts in "Architecture and Computer Organization." Feel free to share any specific content or sections from the outline if you want targeted guidance.
 

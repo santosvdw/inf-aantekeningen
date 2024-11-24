@@ -1,5 +1,7 @@
 # Midterm samenvatting
 
+[Study guide](/studyguide.md)
+
 ## Belangrijke informatie
 
 - Weging: 50%
@@ -9,15 +11,44 @@
 
 # Chapter 0: The basics of logic design
 
-## Discrete and binary values
+## Discrete en binaire waardes
 
-## Logical operators
+Discrete binaire waardes zijn simpelweg gewoon waardes die uitgedrukt worden in waar (1) of niet waar (0).
 
-## Logistical design
+## Logische operatoren
+
+Logische operatoren worden gebruikt om logische expressies te maken. Voorbeelden van dergelijke operatoren zijn bijvoorbeeld AND, OR en NOT, die gebruikt worden om bepaalde condities uit te drukken.
+
+|     |     | AND    | OR                | XOR   | NOT |
+| --- | --- | ------ | ----------------- | ----- | --- |
+| A   | B   | A & B | A &#124; B | A ^ B | ~A  |
+| 0   | 0   | 0      | 0                 | 0     | 1   |
+| 0   | 1   | 0      | 1                 | 1     | 1   |
+| 1   | 0   | 0      | 1                 | 1     | 0   |
+| 1   | 1   | 1      | 1                 | 0     | 0   |
+
+## Logistiek ontwerp
 
 ### Logic gates
+Logic gates zijn componenten binnen hardware die logistieke expressies evalueren om te kijken of deze waar zijn of niet. Logic gates kunnen gezien worden als de bouwblokken van moderne processors.
 
 ### Artihmetic Logic Unit
+De arithmetic logic unit (ALU) is een hardware component dat rekenkundige en shift operaties uitvoert op binare getallen. De input van de ALU noem je een operandus en de output van een ALU is het resultaat van de berekening.
+
+![ALU](/imgs/alu.gif)
+
+Onderdelen van de ALU:
+- Integer operand 1: De eerste integer input
+- Integer operand B: De tweede integer input
+- Input status: overige informatie die benodigd is voor het uitvoeren van operaties. Dit kan bijvoorbeeld een Carry-in bit zijn, die afkomstig is van de berekening van een vorige ALU.
+- Output status: De status outputs zijn verschillende signalen die informatie geven over de uitkomst van de berekening van de ALU. Deze signalen kunnen bijvoorbeeld zijn:
+    - Zero: Het resultaat is 0
+    - Carry-out: De carry die afkomstig is van een rekenkundige operatie
+    - Negative: Het resultaat van de operatie is negatief
+    - Overflow: Het geproduceerde resultaat is te groot om in een register op te slaan.
+- Opcode: De code voor de operatie die door de ALU moet worden uitgevoerd(bv. optelling, vermenigvuldiging, etc.)
+- Integer resultaat: Het resultaat van de ALU
+
 
 #### 1-bit ALU
 
@@ -182,8 +213,8 @@ Levels of program code:
 
 ## Instruction execution
 
-
 ## Finite state machines
+
 - Moore FSM
 - Mealy FSM
 
@@ -204,6 +235,7 @@ Levels of program code:
 ## Creating a single datapath
 
 ### Single cycle design
+
 > Cycle time is determined by length of longest path!
 > Review the schematics from the slides!
 
@@ -237,4 +269,4 @@ Levels of program code:
 
 ### Other pipeline structure possibilities
 
-#### ARM 
+#### ARM
