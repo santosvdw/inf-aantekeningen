@@ -354,3 +354,35 @@ Sommige operaties zijn gewoonlijk erg snel en alleen maar in sommige gevallen sl
 > Amortisatie is een proces waarbij een deel van de tijd die bespaard wordt met een operatie wordt gespaard om een andere operatie die wat langer duurt sneller te laten verlopen.
 
 Bij amortisatie heb heb je een echte tijd een een virtuele tijd voor een operatie. Die virtuele tijd is dan de echte tijd $$-$$ de gespaarde tijd. Deze virtuele tijd noemen we **geamortiseerde kosten**. De **geamortiseerde complexiteit** van een algorithme is de geamortiseerde kosten als functie van de grootte van de input, oftewel: het verband tussen de grootte van de input en de geamortiseerde kosten.
+
+## College 13: Grafen en disjoint sets
+
+## DS: Grafen
+
+> Een graaf is een verzameling aan nodes die aan elkaar verbonden zijn met edges. Het doel van een graaf is echter niet om waardes te sorteren, maar om netwerken op te slaan.
+
+Grafen kunnen gericht zijn, wat betekent dat een link (edge) tussen twee eenzijdig is of ongericht, wat betekent dat er geen specifieke richting vastgelegd is. Daarnaast kunnen grafen gewogen zijn, wat betekent dat de edges een waarde (zwaarte) hebben, of ongewogen. Een graaf kan een cyclus bevatten, wat betekent dat als je de connecties van een bepaalde node blijft volgen je uiteindelijk bij de originele node uitkomt. Als je vanaf een bepaalde node elke andere node kan bezoeken is het netwerk verbonden, anders is deze verbroken in verschillende componenten.
+
+Een tree is een acyclische, ongerichte, ongewogen graaf.
+
+### Grafische weergave van een graaf
+
+- **Adjacency list**: handig voor uitgespreide grafen.
+- **Adjacency matrix**: handig voor compacte grafen.
+    - a) **Adjacency sets**: een adjacency matrix voor uitgespreide grafen.
+
+In een gegeven graaf is het aantal mogelijke connecties gelijk aan $$c = n(n-1)/2$$. Als het overgrote deel van deze links ook benut wordt is een graaf compact, anders is deze uitgespreid.
+
+Een adjacency list is een member van een node. Deze lijst is een array van pointers naar andere nodes waar deze node mee verbonden is. Dit is handig voor een uitgespreide graaf. Als je een compacte graaf hebt kan je ook een adjacency matrix maken. Deze matrix heeft op de x- en y-as alle nodes binnen een netwerk. De waarden van alle cellen zijn simpelweg een 1 als er een link is en een 0 als er geen link is. Bij een ongerichte matrix is deze diagonaal symmetrisch. Het is dan ook mogelijk om maar een halve matrix op te slaan, om ruimte te besparen. Ten slotte kan je ook adjacency sets toepassen om matrixen voor uitgespreide grafen te maken, hier sla je dan alle edges tussen twee nodes in op.
+
+### ALG: Grafen doorzoeken
+Er zijn verschillende algorithmes die het mogelijk maken om grafen te doorzoeken:
+- Depth first search (stack): vind een pad
+- Breadth first search (queue): vind het snelste pad
+- Iteratieve depth first search: vind het snelste pad (met een stack)
+- Dijkstra's algorithme: vind het kortste pad (kortste som van edge-waardes)
+- A*: vind het kortste pad (dijksta++)
+- Bellman-Ford: vind het kortste pad, zelfs met negatieve edges
+
+### OVERIGE: Minimum spanning tree, Disjoint set, Kruskals algorithme & Ackermann function
+> Zoek video's op youtube
