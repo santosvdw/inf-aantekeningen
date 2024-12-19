@@ -182,7 +182,7 @@ Deze drie grenzen behoren te voldoen aan de volgende regels:
 
 1. Scherpe grenzen: Er bestaat geen $$T(n)$$ waarvoor geldt dat $$\Theta (n) > T(n)$$ of $$\Theta (n) < T(n)$$. Oftewel: $$T(n)$$ mag nooit buiten de bounds van $$\Theta (n)$$ vallen.
 
-2. Oppergrenzen: Er bestaat geen $$T(n)$$ waarvoor geldt dat $$O(n) < T(n)$$. Oftewel: $$T(n)$$ mag nooit groter zijn dan $$O(n)$$. Dus: voor elke functie $$g(n)$$ als gesimplificeerde versie van $$T(n) = f(n)$$ geldt: $$f \in O(g)$$. $$O(g)$$ is zelf geen functie, maar eerder een verzameling van functies. Bij het berekenen van $$g(n)$$ ronden we altijd af naar de grootste term binnen de functie, en laten we constantes terzijde. Overig is het ook handig om te weten dat $$if f_1 \in O(g_1)\ and\ f_2 \in O(g_2),\ then f_1 + f_2 = O(max\{g_1, g_2\})$$
+2. Oppergrenzen: Er bestaat geen $$T(n)$$ waarvoor geldt dat $$O(n) < T(n)$$. Oftewel: $$T(n)$$ mag nooit groter zijn dan $$O(n)$$. Dus: voor elke functie $$g(n)$$ als gesimplificeerde versie van $$T(n) = f(n)$$ geldt: $$f \in O(g)$$. $$O(g)$$ is zelf geen functie, maar eerder een verzameling van functies. Bij het berekenen van $$g(n)$$ ronden we altijd af naar de grootste term binnen de functie, en laten we constantes terzijde. Overig is het ook handig om te weten dat $$if\ f_1\ \in\ O(g_1)\ and\ f_2\ \in\ O(g_2),\ then\ f_1\ +\ f_2\ =\ O(max\{g_1, g_2\})$$
 
 3. Ondergrenzen: Er bestaat geen $$T(n)$$ waarvoor geldt dat $$\Omega (n) > T(n)$$. Oftewel: $$T(n)$$ mag nooit kleiner zijn dan $$\Omega (n)$$.
 
@@ -253,16 +253,17 @@ int binary_search(int a[], int n, int x) {
 
 ### DS: Hash table
 
-Een hash table lijkt een beetje op een map die elke key in een voorspelbare plek opslaat, waardoor deze makkelijk doorzoekbaar wordt. Een goede hash table bevat dan ook een **hash functie**, die bepaalt op welke index binnen de table de key wordt neergezet. De index van een key is bijvoorbeeld $$index=hashfunction(key) \ \% \ table\_size$$. Deze index noem je de **hash bucket**. Hoewel je zou denken dat de hash table standaard een map is, is het in veel gevallen een array. Elk item van de array is dan weer een pointer naar de set die de waardes van de key bevat. Het is ook mogelijk dat twee keys dezelfde uitkomst van de hash functie hebben ($$hashfunction(apple) = 2 \ en \ hashfunction(pear) = 2$$). In dat geval zullen beide waardes van de keys op index twee geplaatst worden, dit noem je een  **hash collision**.
+Een hash table lijkt een beetje op een map die elke key in een voorspelbare plek opslaat, waardoor deze makkelijk doorzoekbaar wordt. Een goede hash table bevat dan ook een **hash functie**, die bepaalt op welke index binnen de table de key wordt neergezet. De index van een key is bijvoorbeeld $$index=hashfunction(key) \ \% \ table\_size$$. Deze index noem je de **hash bucket**. Hoewel je zou denken dat de hash table standaard een map is, is het in veel gevallen een array. Elk item van de array is dan weer een pointer naar de set die de waardes van de key bevat. Het is ook mogelijk dat twee keys dezelfde uitkomst van de hash functie hebben ($$hashfunction(apple) = 2 \ en \ hashfunction(pear) = 2$$). In dat geval zullen beide waardes van de keys op index twee geplaatst worden, dit noem je een **hash collision**.
 
 Een hash collision kan je op twee manieren oplossen:
+
 1. **Separate chaining**: Gebruik een linked list of een dynamische array om op elke index een lijst te maken die gemakkelijk kan groeien.
 2. **Open addressing**: Zoek naar de dichtstbijzijnde index waar de waarde opgeslagen kan worden.
-    a) Linear probing: ga simpelweg naar de volgende index.
-    b) Quadratic probing: ga naar de index die het kwadraat van de huidige index is.
-    c) Double hashing: pas een tweede hashfunctie toe om een nieuwe index te kiezen.
+   a) Linear probing: ga simpelweg naar de volgende index.
+   b) Quadratic probing: ga naar de index die het kwadraat van de huidige index is.
+   c) Double hashing: pas een tweede hashfunctie toe om een nieuwe index te kiezen.
 
-De **load factor** van een hash table geeft aan hoe vol deze zit. $$Load factor = Size / Capacity$$. Zodra de load factor bereikt is wordt de array van de hash table uitgebreid en worden de hash buckets opnieuw berekend. Een hogere load factor betekent dat je de hash table voller kan maken voordat je deze resized, wat ook betekent dat de kans op collisions groter is. Als $$load factor < 1$$, dan is de tijd die het kost om een item uit een hash table met grootte $$n$$ op te zoeken constant, en niet afhankelijk van $$n$$! 
+De **load factor** van een hash table geeft aan hoe vol deze zit. $$Load factor = Size / Capacity$$. Zodra de load factor bereikt is wordt de array van de hash table uitgebreid en worden de hash buckets opnieuw berekend. Een hogere load factor betekent dat je de hash table voller kan maken voordat je deze resized, wat ook betekent dat de kans op collisions groter is. Als $$load factor < 1$$, dan is de tijd die het kost om een item uit een hash table met grootte $$n$$ op te zoeken constant, en niet afhankelijk van $$n$$!
 
 ### DS: Bloom filter
 
@@ -280,4 +281,38 @@ Een suffix tree is een datastructuur voor het opslaan van alle bestaande suffixe
 
 ### DS: Tree
 
-In een linked list is elke node gekoppeld aan een child. Als er echter nodes zijn die aan meer dan een kind gekoppeld zijn, is er sprake van een **tree**. Een tree bestaat uit nodes (vertices), edges (links) en een speciale node: de **root**. Als een node geen kinderen heeft, heet een een **leaf**. Anders is het een **interne node**. De diepte van een tree is het aantal links aan de root. De hoogte van een node is het aantal kinderen die er tussen die node en de laatste leaf zitten. Een full binairy tree is een tree waarvan elke interne node twee kinderen heeft.
+In een linked list is elke node gekoppeld aan een child. Als er echter nodes zijn die aan meer dan een kind gekoppeld zijn, is er sprake van een **tree**. Een tree bestaat uit nodes (vertices), edges (links) en een speciale node: de **root**. Als een node geen kinderen heeft, heet een een **leaf**. Anders is het een **interne node**. De diepte van een tree is het aantal links aan de root. De hoogte van een node is het aantal kinderen die er tussen die node en de laatste leaf zitten. Een full binary tree is een tree waarvan elke interne node twee kinderen heeft.
+
+## College 8: Binary trees, heaps en priority queues
+
+### DS: Binary tree
+
+> Een binary tree is een tree waar elke interne node **maximaal** twee kinderen heeft. Een binary tree bestaat eigenlijk gewoon uit een collectie nodes met de volgende structuur:
+
+```c
+struct node {
+    int value;
+    struct node *left;
+    struct node *right;
+}
+```
+
+Een linked tree doorlopen heet traversal, bij dit proces doorloop je alle waardes binnen een binary tree.
+
+### ADT: Priority Queue
+
+> Een priority queue is een gewone queue (FIFO), waar alle items een prioriteitswaarde hebben. De items met de hoogste prioriteitswaarde worden als eerste uit de lijst gehaald.
+
+Je kan dit op twee manieren implementeren:
+
+| Operatie | Linked list (unordered) | Dynamic array of linked list (ordered) |
+| -------- | ----------------------- | -------------------------------------- |
+| Enqueue  | $$O(1)$$                | $$O(n)$$                               |
+| Dequeue  | $$O(n)$$                | $$O(1)$$                               |
+
+
+### ADT: Binary Heap
+
+> Een binary tree kan de *heap* property bevatten: wat betekent dat elke node groter is dan zijn kinderen.
+
+Als de bovenste invariant van toepassing is bij een binary tree, is deze een **binary heap**. Het doorzoeken van een binary heap, en het toevoegen/verwijderen van waardes aan een binary heap kan in $$O(log_2(n))$$ tijd.
