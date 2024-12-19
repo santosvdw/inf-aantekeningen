@@ -160,7 +160,7 @@ De relatie tussen tijd en inputgrootte kunnen veel vertellen over de scalability
 - Polynomiaal, superlineair = $$T(n) = c * n^x (x > 1)$$
 - Exponentieel = $$T(n) = c * a^n (a > 1)$$
 
-## College 3: Best case, worst case, set, map (15:16)
+## College 3: Best case, worst case, set, map & Big-O
 
 ### ALG: Algorithmische analyse
 
@@ -229,3 +229,39 @@ struct set words = {
     i: [2, 3, 7, 10]
 };
 ```
+
+## College 4: Binary search & hash tables
+
+### ALG: Binary search
+
+Het binaire zoekalgoritme zoekt naar een waarde in een lijst door steeds zijn zoekgebied te halveren en heeft daarom ook een tijdscomplexiteit van $$O(n) = log_2(n)$$.
+
+```c
+int binary_search(int a[], int n, int x) {
+    int lo = 0;
+    int hi = n;
+    while (lo != hi) {
+        int mid = lo + (hi-lo)/2;
+        if (a[mid] < x) { lo = mid+1; }
+        else { hi = mid; }
+    }
+    return lo;
+}
+```
+
+### DS: Hash table
+
+Een hash table lijkt een beetje op een map die elke key in een voorspelbare plek opslaat, waardoor deze makkelijk doorzoekbaar wordt. Een goede hash table bevat dan ook een **hash functie**, die bepaalt op welke index binnen de table de key wordt neergezet. De index van een key is bijvoorbeeld $$index=hash\_function(key) \ \% \ table\_size$$. Deze index noem je de **hash bucket**. Hoewel je zou denken dat de hash table standaard een map is, is het in veel gevallen een array. Elk item van de array is dan weer een pointer naar de set die de waardes van de key bevat. Het is ook mogelijk dat twee keys dezelfde uitkomst van de hash functie hebben ($$hash\_function(apple) = 2 \ en \ hash\_function(pear) = 2$$). In dat geval zullen beide waardes van de keys op index twee geplaatst worden, dit noem je een  **hash collision**.
+
+Een hash collision kan je op twee manieren oplossen:
+1. **Separate chaining**: Gebruik een linked list of een dynamische array om op elke index een lijst te maken die gemakkelijk kan groeien.
+2. **Open addressing**: Zoek naar de dichtstbijzijnde index waar de waarde opgeslagen kan worden.
+    a) Linear probing: ga simpelweg naar de volgende index.
+    b) Quadratic probing: ga naar de index die het kwadraat van de huidige index is.
+    c) Double hashing: pas een tweede hashfunctie toe om een nieuwe index te kiezen.
+
+De **load factor** van een hash table geeft aan hoe vol deze zit. $$Load factor = Size / Capacity$$. Zodra de load factor bereikt is wordt de array van de hash table uitgebreid en worden de hash buckets opnieuw berekend. Een hogere load factor betekent dat je de hash table voller kan maken voordat je deze resized, wat ook betekent dat de kans op collisions groter is. Als $$load factor < 1$$, dan is de tijd die het kost om een item uit een hash table met grootte $$n$$ op te zoeken constant, en niet afhankelijk van $$n$$! 
+
+### DS: Bloom filter
+
+Een bloomfilter is een datastructuur die bekend staat om het feit dat het weinig ruimte inneemt. Dat betekent echter ook dat de opslag van een bloom filter erg beperkt is. Een bloomfilter slaat net als hash tables sets op, maar het verschil is dat de operaties op een bloomfilter geen definitieve antwoorden opleveren, maar eerder een antwoord geven op basis met kansberekening. Je kan dus niet met zekerheid kijken of een waarde in een lijst zit, je kan alleen opvragen of deze misschien in de lijst zit. Je kan ook geen waardes verwijderen. Des te groter het aantal waardes in de bloom filter wordt, des te kleiner de kans dat deze accuraat antwoord kan geven over of deze een bepaalde waarde bevat. Daarom is deze datastructuur niet aangeraden voor gebruik op grote schaal.
