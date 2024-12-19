@@ -311,8 +311,26 @@ Je kan dit op twee manieren implementeren:
 | Dequeue  | $$O(n)$$                | $$O(1)$$                               |
 
 
-### ADT: Binary Heap
+### DS: Binary Heap
 
-> Een binary tree kan de *heap* property bevatten: wat betekent dat elke node groter is dan zijn kinderen.
+> Een binary tree met de eigenschappen van een priority queue noemen we een **binary heap**..
 
-Als de bovenste invariant van toepassing is bij een binary tree, is deze een **binary heap**. Het doorzoeken van een binary heap, en het toevoegen/verwijderen van waardes aan een binary heap kan in $$O(log_2(n))$$ tijd.
+Als de bovenste invariant van toepassing is bij een binary tree, is deze een **binary heap**. Het toevoegen/verwijderen van waardes aan een binary heap kan in $$O(log_2(n))$$ tijd en het doorzoeken van de tree kan is $$O(n)$$ tijd.
+
+**Percolaten in een binary heap**: Vergelijk een node met zijn parent en verwissel de nodes indien ze de heap invariant ongeldig maken.
+
+## College 9: Binary search trees
+
+### DS: Binary Search Tree
+
+> Een binary tree waarvoor geldt: alle kinderen kleiner dan een node gaan naar de linker subtree en alle kinderen groter dan een node gaan naar de rechter subtree. De invariant is in tact zodra alle kinderen in de linker subtree van een node kleiner dan de node zijn en alle kinderen in de rechter subtree groter,
+
+Een binary search tree is hetzelfde als een binary tree, maar er is een klein verschil met de invariant: er wordt namelijk rekening gehouden met de volgorde. Dit maakt het sneller om een waarde in de boom te zoeken: dat kan namelijk in een tijd van $$\Omega (log_2(n))$$ in de best case of $$O(n)$$ in de worst case. Hoe snel je door een BST kan zoeken hangt af van de lengte van een tree. Een full BST heeft een lengte $$h = \lfloor log_2(n) \rfloor$$, maar in de worst case is de lengte van een BST met n nodes $$h = n - 1$$.  Bij het toevoegen en verwijderen van items aan de BST is het echter wel belangrijk om altijd na afloop de invariant weer te herstellen met behulp van percolate.
+
+Je kan een BST ook gebruiken voor het implementeren van sets en maps. Het voordeel hiervan is dat je bijvoorbeeld geen hash functies hoeft te gebruiken en je geen expliciet geheugen vrij hoeft te maken. Een nadeel is echter dat dit niet per se extra efficiënt is als de tree niet in balans is. Daarnaast zijn hash tables simpelweg sneller. Je kan een BST ook toepassen bij de implementatie van een priority queue, maar dit is ingewikkelder en levert alsnog niet meer efficiëntie op.
+
+## College 10: AVL trees
+
+Een binaire tree kan in balans gebracht worden door een nieuwe root uit te kiezen en vervolgens de tree te traversen om ervoor te zorgen dat alle kinderen van de root node de invariant niet schenden. 
+
+> Er zijn binary search trees die zichzelf in balans brengen: wij richten ons op **AVL-trees**
