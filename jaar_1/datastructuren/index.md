@@ -181,7 +181,9 @@ Algorithmische analyse is vrij eenvoudig: het belangrijkste is dat je stukken co
 Deze drie grenzen behoren te voldoen aan de volgende regels:
 
 1. Scherpe grenzen: Er bestaat geen $$T(n)$$ waarvoor geldt dat $$\Theta (n) > T(n)$$ of $$\Theta (n) < T(n)$$. Oftewel: $$T(n)$$ mag nooit buiten de bounds van $$\Theta (n)$$ vallen.
-2. Oppergrenzen: Er bestaat geen $$T(n)$$ waarvoor geldt dat $$O(n) < T(n)$$. Oftewel: $$T(n)$$ mag nooit groter zijn dan $$O(n)$$.
+
+2. Oppergrenzen: Er bestaat geen $$T(n)$$ waarvoor geldt dat $$O(n) < T(n)$$. Oftewel: $$T(n)$$ mag nooit groter zijn dan $$O(n)$$. Dus: voor elke functie $$g(n)$$ als gesimplificeerde versie van $$T(n) = f(n)$$ geldt: $$f \in O(g)$$. $$O(g)$$ is zelf geen functie, maar eerder een verzameling van functies. Bij het berekenen van $$g(n)$$ ronden we altijd af naar de grootste term binnen de functie, en laten we constantes terzijde. Overig is het ook handig om te weten dat $$if f_1 \in O(g_1)\ and\ f_2 \in O(g_2),\ then f_1 + f_2 = O(max\{g_1, g_2\})$$
+
 3. Ondergrenzen: Er bestaat geen $$T(n)$$ waarvoor geldt dat $$\Omega (n) > T(n)$$. Oftewel: $$T(n)$$ mag nooit kleiner zijn dan $$\Omega (n)$$.
 
 ### ADT: Set
@@ -251,7 +253,7 @@ int binary_search(int a[], int n, int x) {
 
 ### DS: Hash table
 
-Een hash table lijkt een beetje op een map die elke key in een voorspelbare plek opslaat, waardoor deze makkelijk doorzoekbaar wordt. Een goede hash table bevat dan ook een **hash functie**, die bepaalt op welke index binnen de table de key wordt neergezet. De index van een key is bijvoorbeeld $$index=hash\_function(key) \ \% \ table\_size$$. Deze index noem je de **hash bucket**. Hoewel je zou denken dat de hash table standaard een map is, is het in veel gevallen een array. Elk item van de array is dan weer een pointer naar de set die de waardes van de key bevat. Het is ook mogelijk dat twee keys dezelfde uitkomst van de hash functie hebben ($$hash\_function(apple) = 2 \ en \ hash\_function(pear) = 2$$). In dat geval zullen beide waardes van de keys op index twee geplaatst worden, dit noem je een  **hash collision**.
+Een hash table lijkt een beetje op een map die elke key in een voorspelbare plek opslaat, waardoor deze makkelijk doorzoekbaar wordt. Een goede hash table bevat dan ook een **hash functie**, die bepaalt op welke index binnen de table de key wordt neergezet. De index van een key is bijvoorbeeld $$index=hashfunction(key) \ \% \ table\_size$$. Deze index noem je de **hash bucket**. Hoewel je zou denken dat de hash table standaard een map is, is het in veel gevallen een array. Elk item van de array is dan weer een pointer naar de set die de waardes van de key bevat. Het is ook mogelijk dat twee keys dezelfde uitkomst van de hash functie hebben ($$hashfunction(apple) = 2 \ en \ hashfunction(pear) = 2$$). In dat geval zullen beide waardes van de keys op index twee geplaatst worden, dit noem je een  **hash collision**.
 
 Een hash collision kan je op twee manieren oplossen:
 1. **Separate chaining**: Gebruik een linked list of een dynamische array om op elke index een lijst te maken die gemakkelijk kan groeien.
@@ -265,3 +267,17 @@ De **load factor** van een hash table geeft aan hoe vol deze zit. $$Load factor 
 ### DS: Bloom filter
 
 Een bloomfilter is een datastructuur die bekend staat om het feit dat het weinig ruimte inneemt. Dat betekent echter ook dat de opslag van een bloom filter erg beperkt is. Een bloomfilter slaat net als hash tables sets op, maar het verschil is dat de operaties op een bloomfilter geen definitieve antwoorden opleveren, maar eerder een antwoord geven op basis met kansberekening. Je kan dus niet met zekerheid kijken of een waarde in een lijst zit, je kan alleen opvragen of deze misschien in de lijst zit. Je kan ook geen waardes verwijderen. Des te groter het aantal waardes in de bloom filter wordt, des te kleiner de kans dat deze accuraat antwoord kan geven over of deze een bepaalde waarde bevat. Daarom is deze datastructuur niet aangeraden voor gebruik op grote schaal.
+
+## College 5: Bomen
+
+### DS: Trie
+
+Een trie is een datastructuur voor het opslaan van strings en sequenties. Elke edge is een samenvoeging van alle karakters van de edges die ervoor waren.
+
+### DS: Suffix tree
+
+Een suffix tree is een datastructuur voor het opslaan van alle bestaande suffixen (voorvoegsels) van een string.
+
+### DS: Tree
+
+In een linked list is elke node gekoppeld aan een child. Als er echter nodes zijn die aan meer dan een kind gekoppeld zijn, is er sprake van een **tree**. Een tree bestaat uit nodes (vertices), edges (links) en een speciale node: de **root**. Als een node geen kinderen heeft, heet een een **leaf**. Anders is het een **interne node**. De diepte van een tree is het aantal links aan de root. De hoogte van een node is het aantal kinderen die er tussen die node en de laatste leaf zitten. Een full binairy tree is een tree waarvan elke interne node twee kinderen heeft.
