@@ -346,3 +346,11 @@ Een tree rebalanceren gaat als volgt:
 3. Stel de geselecteerde waarde in als nieuwe root
     a. Traverse de gehele tree en voeg alle waardes opnieuw toe
 ```
+
+## College 11: Amortisatie
+
+Sommige operaties zijn gewoonlijk erg snel en alleen maar in sommige gevallen sloom, zoals bijvoorbeeld het uitbreiden van een dynamische array. In dit soort situaties zal het worst case scenario vrijwel alleen gebaseerd zijn op het uitbreiden van de array, wat erg misleidend is aangezien dit een zeldzaam geval is.
+
+> Amortisatie is een proces waarbij een deel van de tijd die bespaard wordt met een operatie wordt gespaard om een andere operatie die wat langer duurt sneller te laten verlopen.
+
+Bij amortisatie heb heb je een echte tijd een een virtuele tijd voor een operatie. Die virtuele tijd is dan de echte tijd $$-$$ de gespaarde tijd. Deze virtuele tijd noemen we **geamortiseerde kosten**. De **geamortiseerde complexiteit** van een algorithme is de geamortiseerde kosten als functie van de grootte van de input, oftewel: het verband tussen de grootte van de input en de geamortiseerde kosten.
