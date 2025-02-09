@@ -75,3 +75,27 @@ To prove $p$, assume $\neg p$ and derive a contradiction. If $\neg p \rightarrow
 
 ### Proving biconditional statements $p \leftrightarrow q$
 We must show that $p \rightarrow q$ and $q \rightarrow p$ are both true. Sometimes **iff** is used as an abbreviation for "if and only if".
+
+## First order logic (predicate logic)
+
+Predicate logic uses the following features:
+- **Variables**: $x, y, z$
+- **Predicates**: $P, M$
+- **Quantifiers**: $\forall, \exists$
+
+Values for variables are all within a **domain**. The elements within the domain are **constants**. The domain is often denoted bu $U$ (**universe**). Predicates can take in a number of arguments, this number is called it's **arity**. 
+
+Predicates by themselves have no meaning. They receive their meaning by defining for which combination of argument constants they are true. This is called the **interpretation** of the predicate. If a predicate does not have the correct amount of arguments, it is not a proposition and thus can't be assigned a truth value. Connectives from propositional logic can be used in predicate logic as well.
+
+We use quantifiers to refer to properties of multiple objects. The two most important quantifiers are:
+- **Universal quantifier**: "For all", $\forall$
+- **Existential quantifier**: "Some", $\exists$
+
+$\forall xP(x)$ asserts that $P(x)$ is true for every $x$ in universe $U$.
+$\exists xP(x)$ asserts that $P(x)$ is true for some $x$ in universe $U$.
+$\exists!xP(x)$ neabs that $P(x)$ is true for one and only one $x$ in the universe $U$. 
+
+The quantifiers $\forall$ and $\exists$ have a higher precedence than all other logical operators. This means for example that $\forall xP(x) \lor Q(x) \equiv (\forall xP(x)) \lor Q(X)$ and is not equal to $\forall xP(x) \lor \forall xQ(x)$. To **break precedence** we often use $:$ $\forall x : P(x) \lor Q(x) \equiv \forall x(P(x) \lor Q(x))$ 
+
+Two statements involving predicates and quantifiers are **logically equivalent** if and only if they have the samen truth value for every domain used for the variables and for every interpretation of the predicates. We write this as $S \equiv T$.
+
