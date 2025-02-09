@@ -53,3 +53,25 @@ Morgans laws are short hand tricks that allow us to rewrite compound propoisiton
 
 ### Constructing logical equivalences
 To proof that $A \equiv B$, we must rewrite $A$ applying one change at a time until we arrive at $B$. We can let $A$ be the original expression and $B$ be the result. To derive $B$ from $A$ we will apply the known logical equivalences to $A$ until it can be written as $B$.
+
+## Informal proofs
+Informal proofs are used often because they're generally easier to write down
+
+Important definitions:
+- **Theorem**: a statement that can be shown to be true using definitions, other theorems, etc.
+- **Lemma**: a "helping theorem" or a result needed to prove a theorem
+- **collorary**: a result that follows from a theorem
+- **Conjecture**: a statement that is proposed to be true, but hasn't been proven yet
+
+### Proving conditional statements $p \rightarrow q$
+#### Direct proof
+Assume that $p$ is true. Use logical equivalences etc. to show that $q$ must then also be true
+
+#### Proof by contraposition
+Assume $\neg q$ and show $\neg p$ is also true. By showing that $\neg q \rightarrow \neg p$ we show that $p \rightarrow q$. This is called indirect proof. 
+
+#### Proof by contradiction
+To prove $p$, assume $\neg p$ and derive a contradiction. If $\neg p \rightarrow \bot$, then $p \rightarrow \top$.
+
+### Proving biconditional statements $p \leftrightarrow q$
+We must show that $p \rightarrow q$ and $q \rightarrow p$ are both true. Sometimes **iff** is used as an abbreviation for "if and only if".
