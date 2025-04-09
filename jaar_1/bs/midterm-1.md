@@ -77,14 +77,18 @@ Symmetric multiprocessing isn't great for scaling, as it can lead to problems if
 ##### NUMA multiprocessing architecture
 **Non Uniform Memory Access** was created for scaling. With NUMA, all processors have their own memory which they can read faster than external memory. Without shared memory, there are no problems with memory contention thus NUMA makes scaling easier. However if a NUMA node needs to access information from other nodes or other forms of external memory, there will be a performance penalty.
 
+### Booting an OS
+1. Power is initialized on the system and execution starts at a fixed memory location
+2. OS must be made available so hardware can start it
+- A small piece of code (**bootstrap loader (BIOS)**), stored in **ROM (Read Only Memory)** or **flash memory** locates the kernel, loads it into memory and starts it. However, modern systems often use **Unified Extensible Firmware Interface (UEFI)**.
+3. Common bootsrap loader **GRUB** allows for selection of kernel from multiple disks, versions, etc.
+4. The kernel loads so then the system is running
+5. **System daemons** are started.
+    > A **daemon** is a background process that is always running and handles specific tasks without user interaction. Examples are system daemons, network daemons, bluetooth daemons, etc.
+6. Boot loaders frequentlu allow various boot states, such as single user mode
+
 ### Operating system operations
 How does the OS work?
-
-1. **Bootstrap program**: simple code to initialize the system and load the kernel. E.g. **UEFI firmware**.
-2. Kernel loads
-3. **System daemons** are started.
-    > A **daemon** is a background process that is always running and handles specific tasks without user interaction. Examples are system daemons, network daemons, bluetooth daemons, etc.
-
 **Dual-mode** operations allow the OS to protect itself and other system components, by creating a **user mode** and **kernel mode**, each with different privileges. The **mode bit** is provided by hardware (which means that users can't easily change the mode). Dangerous operations can't be executed by users because they don't have the privileges. System calls turn on kernel mode, after which the task is executed in kernel mode and when the system call returns user mode is switched on again. Some processors like Intel's processors have **protection rings**, which have varying levels of privilege where the kernel is the most privileged and everything else has decreasing levels of privilege.
 
 A **timer** can also be set to prevent code from infinite looping. These timers are set in kernel mode, after which user mode is switched on. When the timer hits 0, an interrupt is generated and the interrupt is handled in kernel mode.
@@ -99,3 +103,54 @@ System calls can be grouped into 4 classes:
 4. **Protection and security**:
     - **Protection** controlling access of processes or users to resources defined by the OS.
     - **Security**: defense of the system against internal/external attacks by keeping track of users, assigning them and the groups they're in certain privileges, keeping track of the files they create and making use of **privilege escalation**.
+
+## LECTURE 02: Operating system structures
+
+### Operating system services
+**OS Services** provide an environment for execution of programs and services to programs and users. They are basically specialized workspaces that handle specific tasks.
+
+#### User operating system services
+- **Program execution**: runs executable files by loading it into memory and running it, ending the program either normally or abnormally
+- **I/O operations**: handles I/O interactions
+- **User interface**: handles user interfaces, whether it's through a CLI (**Command Line Interface** allows users to interact with a system through commands) or a GUI or other way
+- **File system manipulation**: read/write to files
+- **Communication**: handle communication between processes (trhough shared memory or message passing)
+- **Error detection**: take appropriate action when an error occurs and provide debugging facilities
+
+#### System operating system services
+- **Resource allocation**: when multiple users or tasks are running, decide who gets what resources
+- **Logging**: keep track of which users there are and what kinds of resources they use
+- **Protection and security**: controll access of users/processes to system resources and require authentication to defend the system against foreign I/O access
+
+### System calls
+Programming interface for the services provided by the OS, which are typically written in a high-level language. Mostly accessed through **Application Programming Interfaces (API's)**, rather than direct system call use. The three most common API's are Win32, POSIX and Java. System calls are more than just one simple command. They contain a variety of instructions on how to perform a task.
+
+Typically all system calls are associated with a number. The **system call interface** keeps track of all numbers with an indexed table. Whenever a system call is made, the number gets looked up in the system call interface and the corresponding number gets sent as a software interrupt to the CPU. The interrupt gets handled in the OS kernel and returns the status of the system call and any return values.
+
+Sometimes more information has to be given for a system call to have all relevant information. These are some common ways to pass parameters in a system call:
+1. Pass the parameters in registers (in some cases there may be more parameters than registers)
+2. Store parameters in a block of memory, and pass the address to this block
+
+### Linkers and loaders
+Source code is compiled into object files designed to be loaded into any physical memory location (**relocatable object file**). A **linker** combines multiple object files into a **executable** file. The program is stored in binary and must be brought into memory by a **loader** to be executed. **Relocation** is performed to give programs a virtual address space. This makes it easier for programs to access their data, because the virtual memory addresses start at 0 instead of some random index.
+
+Modern general purpose systems dont link libraries into executables, **dynamically linked libraries** are loaded as needed and shared by all executables that need that library. Object and executable files have standard formats so the OS knows how to load and start them.
+
+### Operating system structure
+#### Monolithic structure (original UNIX)
+With original UNIX OS systems, the OS consisted of two seperate parts: system programs and the kernel. This OS handles everything in between hardware and system calls: i.e. file system, CPU scheduling, memory management, etc.
+
+#### Linux system structure
+Linux has a hybrid monolithic and modular design, where you can include or remove certain functionality if it's not needed. 
+
+#### Layered approach
+The OS is divided into multiple layers, where the highest layer is the user interface and the lowest layer is the hardware. With modularity, layers are chosen to serve specific system needs. This is the ideal approach but is very hard to do. 
+
+#### Microkernel system structure
+This structure moves many parts of the microkernel into the user space. This keeps the kernel minimal and lets many of the important parts of the kernel, such as device drivers and application programs for example be handled as if they were regular user processes. *The main purpose of the microkernel is to relay messages from one module to another*. This approach makes it easier to extend the microkernel, more reliable, easier to port the OS to new architectures and more secure. However, it also causes more overhead of userspace to kernel space because of interprocess communication.
+
+#### Modules
+Many modern operating system implement **loadable kernel modules (LKM's)**. This is an object-oriented approach where all core components are seperate and can be used as needed. This is geared towards the layered approach as it is quite similar but even more flexible. 
+
+#### Hybrid systems
+Most modern systems, like linux, are a mix of multiple models. These have multiple apporaches to address system needs. Linux kernels for example have kernels in kernel address space which makes them monolythic but also allow for modules for dynamic loading of functionality. Windows is mostly monolithic but is partly monolithic because it allows microkernels for subsystems (e.g. Windows Subsystem for Linux WSL). Apple is also hybrid and it makes use of dynamically loadable modules (**kernel extensions**).
