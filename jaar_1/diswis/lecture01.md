@@ -99,3 +99,4 @@ The quantifiers $\forall$ and $\exists$ have a higher precedence than all other 
 
 Two statements involving predicates and quantifiers are **logically equivalent** if and only if they have the samen truth value for every domain used for the variables and for every interpretation of the predicates. We write this as $S \equiv T$.
 
+# MISSING INFORMATION
